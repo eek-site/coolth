@@ -491,6 +491,104 @@
             opacity: 0.8;
         }
 
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-card {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .phone-number {
+            display: block;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .phone-number:hover {
+            color: #00ff88;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f3 100%);
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resource-category {
+            text-align: center;
+        }
+
+        .resource-category h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #060c22;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #00ff88;
+            display: inline-block;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid #00ff88;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #060c22;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.2);
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .resource-icon {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
         /* Footer */
         footer {
             background: #000;
@@ -566,6 +664,16 @@
 
             .trust-item {
                 font-size: 0.8rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .resource-link {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -907,6 +1015,40 @@
             <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
                 ⭐ Trusted by thousands of property owners worldwide<br>
                 💯 100% satisfaction guarantee or money back
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <div class="resources-grid">
+                <div class="resource-category">
+                    <h3>Supplier Resources</h3>
+                    <div class="resource-links">
+                        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=vMb_Yc7Zi0WBINMhh8N3DSnleyJD3nBGm0qPafV8nlFUNFVCVE1GRTEwNzBLWk1FSktXVUU5NEJDTC4u" target="_blank" class="resource-link">
+                            <span class="resource-icon">📋</span>
+                            <span>Certified Applicator Registration</span>
+                        </a>
+                        <a href="https://roadandrescue.sharepoint.com/:b:/s/rar/ERyuatf07hxLlcFmuqoKMC4Bg4ft4Tir4ywoHOxpPAPTpw?e=47vJVE" target="_blank" class="resource-link">
+                            <span class="resource-icon">📄</span>
+                            <span>Applicator Agreement</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="resource-category">
+                    <h3>Customer Resources</h3>
+                    <div class="resource-links">
+                        <a href="https://roadandrescue.sharepoint.com/:b:/s/rar/ERNsPGa3LHJOr81kshpnu28B_kDxFv3v4i23nrwWorW_NQ?e=97k8WO" target="_blank" class="resource-link">
+                            <span class="resource-icon">🔒</span>
+                            <span>Privacy Policy</span>
+                        </a>
+                        <a href="https://roadandrescue.sharepoint.com/:b:/s/rar/EcXB779sPmZGhpIHPE8wMvwB97zilQIFLo0tbW0ubJnSkA?e=OKeWqh" target="_blank" class="resource-link">
+                            <span class="resource-icon">📜</span>
+                            <span>Terms of Service</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
