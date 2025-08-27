@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Book Service - Coolth Emergency Refrigeration</title>
+  <meta name="description" id="pageDescription" content="Book your emergency refrigeration service with Coolth. Professional service across New Zealand." />
+  <meta name="keywords" content="emergency refrigeration, fridge repair, freezer breakdown, commercial chiller, cool room repair, HVAC maintenance, refrigeration technician NZ" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.redditstatic.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.redditstatic.com https://www.googletagmanager.com https://googleads.g.doubleclick.net;">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-COOLTH_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-COOLTH_ID');
+    gtag('config', 'G-COOLTH_GA_ID');
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0 0 80px 0;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background: #ffffff;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .business-name {
+      font-size: 2.2em;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0.3em 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    header img {
+      max-width: 250px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 1.8em;
+      margin: 0.5em 0 0.2em;
+      color: #333;
+    }
+    .breadcrumb {
+      background: #e3f2fd;
+      padding: 10px 20px;
+      margin: 0;
+      text-align: left;
+      font-size: 0.9em;
+    }
+    .breadcrumb a {
+      color: #00b4d8;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .emergency-banner {
+      background: linear-gradient(135deg, #ff6b35, #f72585);
+      color: white;
+      padding: 12px;
+      margin: 0;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+    .booking-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .booking-header {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .booking-header h2 {
+      margin: 0 0 10px 0;
+      font-size: 2em;
+    }
+    .booking-header p {
+      margin: 0;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    .service-stats {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+    .stat-item {
+      font-size: 0.9em;
+    }
+    .stat-number {
+      font-size: 1.8em;
+      font-weight: bold;
+      display: block;
+    }
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 0 20px;
+    }
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .progress-step::before {
+      content: '';
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ddd;
+      display: block;
+      margin: 0 auto 8px;
+    }
+    .progress-step.active::before {
+      background: #00b4d8;
+    }
+    .progress-step.completed::before {
+      background: #06ffa5;
+    }
+    .progress-step span {
+      font-size: 0.9em;
+      color: #666;
+    }
+    .progress-step.active span {
+      color: #00b4d8;
+      font-weight: bold;
+    }
+    .booking-steps {
+      padding: 30px;
+    }
+    .step {
+      display: none;
+      text-align: left;
+    }
+    .step.active {
+      display: block;
+    }
+    .step h3 {
+      color: #00b4d8;
+      margin-bottom: 20px;
+      font-size: 1.4em;
+    }
+    .location-input, .details-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+    .location-input:focus, .details-input:focus {
+      border-color: #00b4d8;
+      outline: none;
+    }
+    .details-input {
+      height: 120px;
+      resize: vertical;
+    }
+    
+    /* Calendar styles for HVAC maintenance */
+    .calendar-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .calendar {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .calendar h4 {
+      margin: 0 0 15px 0;
+      text-align: center;
+      color: #333;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .day-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 8px 4px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    .day {
+      text-align: center;
+      padding: 10px 4px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .day:hover {
+      background: #f0f0f0;
+    }
+    .day.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .day.selected {
+      background: #00b4d8;
+      color: white;
+    }
+    .day.past {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .time-slot {
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .time-slot:hover {
+      border-color: #00b4d8;
+    }
+    .time-slot.selected {
+      background: #00b4d8;
+      color: white;
+      border-color: #00b4d8;
+    }
+    .time-slot.limited {
+      border-color: #ff9500;
+      background: #fff8f0;
+    }
+    .time-slot .availability {
+      font-size: 0.8em;
+      color: #ff6600;
+      margin-top: 4px;
+    }
+    .availability-alert {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .availability-alert.urgent {
+      background: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    
+    .urgency-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .urgency-option {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .urgency-option:hover {
+      border-color: #00b4d8;
+    }
+    .urgency-option.selected {
+      border-color: #00b4d8;
+      background: #e3f2fd;
+    }
+    .urgency-option.emergency {
+      border-color: #ff6b35;
+      background: #fff5f0;
+    }
+    .urgency-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .urgency-time {
+      color: #00b4d8;
+      font-size: 0.9em;
+      margin-bottom: 8px;
+    }
+    .urgency-option.emergency .urgency-time {
+      color: #ff6b35;
+      font-weight: bold;
+    }
+    .urgency-description {
+      font-size: 0.85em;
+      color: #666;
+    }
+    .reservation-summary {
+      background: #e3f2fd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .reservation-summary h4 {
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      align-items: center;
+    }
+    .summary-item strong {
+      color: #00b4d8;
+    }
+    .button {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1em;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      margin: 10px 5px;
+    }
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .button.secondary {
+      background: #6c757d;
+    }
+    .button.secondary:hover {
+      background: #545b62;
+    }
+    .button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .terms-section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .terms-checkbox input {
+      margin-top: 4px;
+      transform: scale(1.2);
+    }
+    .terms-text {
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+    .terms-text a {
+      color: #00b4d8;
+      text-decoration: none;
+    }
+    .terms-text a:hover {
+      text-decoration: underline;
+    }
+    .info-box {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: left;
+    }
+    .info-box h4 {
+      margin: 0 0 10px 0;
+      color: #0077b6;
+    }
+    .info-box ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #555;
+    }
+    
+    .spoilage-warning {
+      background: #ffebee;
+      border: 2px solid #f44336;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+      animation: urgencyPulse 2s infinite;
+    }
+    
+    @keyframes urgencyPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+    }
+    
+    .spoilage-warning h3 {
+      margin: 0 0 10px 0;
+      color: #d32f2f;
+      font-size: 1.4em;
+    }
+    
+    .spoilage-warning p {
+      color: #b71c1c;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .booking-steps {
+        padding: 20px;
+      }
+      .urgency-options {
+        grid-template-columns: 1fr;
+      }
+      .business-name {
+        font-size: 1.8em;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .calendar-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="emergency-banner">
+  🚨 FOOD SPOILAGE EMERGENCY? • Most perishables spoil within 2-4 hours • Call 0800 600 506 NOW 🚨
+</div>
+
+<header>
+  <img id="headerImage" src="/coolth-logo.png" alt="Coolth Emergency Refrigeration" />
+  <div class="business-name">Coolth Emergency Refrigeration</div>
+  <h1 id="headerTitle">Book Your Refrigeration Service</h1>
+  <p id="headerSubtitle" style="font-size: 1.1em; color: #666; margin: 10px 0;"></p>
+</header>
+
+<div class="breadcrumb">
+  <a href="/">Home</a> > <span id="breadcrumbText">Book Service</span>
+</div>
+
+<div class="booking-container">
+  <div class="booking-header">
+    <h2 id="bookingTitle">Book Your Service</h2>
+    <p id="bookingDescription">24/7 Emergency refrigeration service across New Zealand</p>
+    
+    <div class="service-stats" id="serviceStats">
+      <div class="stats-grid" id="statsContent">
+        <!-- Dynamic stats will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-step active" id="step1-progress">
+      <span id="step1Label">Details</span>
+    </div>
+    <div class="progress-step" id="step2-progress">
+      <span id="step2Label">Urgency</span>
+    </div>
+    <div class="progress-step" id="step3-progress">
+      <span>Confirm</span>
+    </div>
+  </div>
+
+  <div class="booking-steps">
+    <!-- Step 1: Service Details -->
+    <div class="step active" id="step1">
+      <h3 id="step1Title">Step 1: Service Details</h3>
+      
+      <div id="spoilageWarning" class="spoilage-warning" style="display: none;">
+        <!-- Will be populated for emergency services -->
+      </div>
+      
+      <label for="locationInput" style="display: block; margin-bottom: 8px; font-weight: bold;">Where do you need service?</label>
+      <input type="text" class="location-input" id="locationInput" placeholder="Enter your address, suburb, or region" />
+      
+      <label for="detailsInput" style="display: block; margin-bottom: 8px; margin-top: 15px; font-weight: bold;" id="detailsLabel">Tell us more about your situation:</label>
+      <textarea class="details-input" id="detailsInput" placeholder="Describe the issue or what you need help with..."></textarea>
+      
+      <div class="info-box" id="serviceInfoBox">
+        <!-- Dynamic service information will be inserted here -->
+      </div>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <button class="button" id="nextButton" onclick="goToStep2()">Next: Select Urgency</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Urgency Selection (or Date/Time for HVAC) -->
+    <div class="step" id="step2">
+      <h3 id="step2Title">Step 2: How urgent is your situation?</h3>
+      
+      <!-- Standard urgency options for most services -->
+      <div class="urgency-options" id="urgencyOptions" style="display: block;">
+        <!-- Dynamic urgency options will be inserted here -->
+      </div>
+      
+      <!-- Calendar view for HVAC maintenance -->
+      <div id="calendarSection" style="display: none;">
+        <div id="availabilityAlert" class="availability-alert" style="display: none;"></div>
+        
+        <div class="calendar-container">
+          <div class="calendar" id="currentCalendar">
+            <h4 id="currentMonth"></h4>
+            <div class="calendar-grid"></div>
+          </div>
+          <div class="calendar" id="nextCalendar">
+            <h4 id="nextMonth"></h4>
+            <div class="calendar-grid"></div>
+          </div>
+        </div>
+
+        <div id="timeSlotContainer" style="display: none;">
+          <h4>Available times for <span id="selectedDateDisplay"></span>:</h4>
+          <div class="time-slots" id="timeSlots"></div>
+        </div>
+      </div>
+
+      <div style="margin: 20px 0;">
+        <button class="button secondary" onclick="goToStep1()">Back</button>
+        <button class="button" id="confirmUrgencyBtn" onclick="goToStep3()" disabled>Confirm Selection</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Confirmation -->
+    <div class="step" id="step3">
+      <h3>Step 3: Confirm your booking request</h3>
+      
+      <div class="reservation-summary">
+        <h4 id="summaryTitle">Your Service Request</h4>
+        <div class="summary-item">
+          <span>Service:</span>
+          <strong id="summaryService"></strong>
+        </div>
+        <div class="summary-item">
+          <span>Location:</span>
+          <strong id="summaryLocation"></strong>
+        </div>
+        <div class="summary-item" id="urgencyRow">
+          <span>Response Time:</span>
+          <strong id="summaryUrgency"></strong>
+        </div>
+        <div class="summary-item" id="dateRow" style="display: none;">
+          <span>Date:</span>
+          <strong id="summaryDate"></strong>
+        </div>
+        <div class="summary-item" id="timeRow" style="display: none;">
+          <span>Time:</span>
+          <strong id="summaryTime"></strong>
+        </div>
+        <div class="summary-item">
+          <span>Estimated Price:</span>
+          <strong id="summaryPrice"></strong>
+        </div>
+        <div id="reservationTimerSection" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #00b4d8;">
+          <div class="summary-item">
+            <span style="font-size: 1.1em;">⏰ Reserved Until:</span>
+            <strong style="color: #d63384;" id="reservationTimer"></strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-section">
+        <h4>Terms and Conditions</h4>
+        <div class="terms-checkbox">
+          <input type="checkbox" id="termsAgree" onchange="toggleBookingButton()" />
+          <div class="terms-text">
+            I agree to the <a href="https://coolth.tech/terms" target="_blank">Coolth Emergency Refrigeration Terms of Service</a> and understand that:
+            <ul style="margin: 10px 0; padding-left: 20px;" id="termsList">
+              <!-- Dynamic terms will be inserted here -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+          <button class="button secondary" onclick="goToStep2()">Back to Selection</button>
+          <a href="#" class="button" id="callToBookBtn" style="font-size: 1.2em; padding: 15px 30px; background: linear-gradient(135deg, #06ffa5, #00c896);" onclick="proceedToPayment()">
+            Book Now & Pay Online
+          </a>
+        </div>
+        <p style="margin: 15px 0; color: #666;">You'll be redirected to secure payment, then our technician will be dispatched</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Service configuration for Coolth refrigeration services
+const serviceConfigs = {
+  'home-fridge': {
+    title: 'Home Fridge & Freezer Emergency Repair',
+    subtitle: 'Don\'t let your food spoil! Emergency response available',
+    breadcrumb: 'Home Fridge/Freezer',
+    bookingTitle: 'Emergency Fridge/Freezer Repair',
+    bookingDescription: 'Save your food from spoilage • 30-60 minute response',
+    step1Title: 'Step 1: Tell us about your refrigeration emergency',
+    detailsLabel: 'Describe the problem (not cooling, making noise, leaking, etc.):',
+    detailsPlaceholder: 'e.g., Fridge not cooling, freezer defrosting, water leaking, strange noises, ice buildup, etc.',
+    image: 'fridge-image.png',
+    imageAlt: 'Home Fridge Freezer Repair',
+    useCalendar: false,
+    showSpoilageWarning: true,
+    stats: [
+      { number: '$249', text: 'callout fee' },
+      { number: '30-60', text: 'minutes' },
+      { number: '24/7', text: 'emergency' },
+      { number: 'All', text: 'brands' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'emergency',
+        title: 'EMERGENCY - Not Cooling',
+        time: '30-60 minutes',
+        description: 'Food at risk of spoilage - Priority response',
+        price: '$349',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_emergency_fridge'
+      },
+      {
+        id: 'urgent',
+        title: 'Urgent - Partial Cooling',
+        time: '2-3 hours',
+        description: 'Still cooling but not properly',
+        price: '$249',
+        stripeUrl: 'https://buy.stripe.com/coolth_urgent_fridge'
+      },
+      {
+        id: 'standard',
+        title: 'Standard Service',
+        time: 'Next day',
+        description: 'Non-urgent maintenance or minor issues',
+        price: '$199',
+        stripeUrl: 'https://buy.stripe.com/coolth_standard_fridge'
+      }
+    ],
+    spoilageWarning: `
+      <h3>⚠️ FOOD SPOILAGE WARNING</h3>
+      <p>Perishables spoil within 2-4 hours without refrigeration!</p>
+      <p>Act now to save hundreds of dollars in groceries</p>
+    `,
+    infoContent: `
+      <h4>Our Emergency Service Includes:</h4>
+      <ul>
+        <li><strong>Rapid diagnosis</strong> of cooling problems</li>
+        <li><strong>Refrigerant recharge</strong> if needed</li>
+        <li><strong>Compressor & thermostat</strong> repairs</li>
+        <li><strong>Seal replacement</strong> and leak fixes</li>
+        <li><strong>24/7 emergency response</strong> available</li>
+      </ul>
+    `,
+    terms: [
+      'Emergency callout includes diagnosis and minor repairs',
+      'Parts charged separately if required',
+      'Payment due upon service completion',
+      'Priority response for food spoilage emergencies'
+    ]
+  },
+  'commercial': {
+    title: 'Commercial Chiller & Freezer Emergency',
+    subtitle: 'Protect your business stock from costly losses',
+    breadcrumb: 'Commercial Refrigeration',
+    bookingTitle: 'Commercial Refrigeration Emergency',
+    bookingDescription: 'Priority business response • Compliance maintained',
+    step1Title: 'Step 1: Describe your commercial refrigeration emergency',
+    detailsLabel: 'Equipment type and problem description:',
+    detailsPlaceholder: 'e.g., Walk-in cooler not cooling, display case temperature rising, ice cream freezer down, etc.',
+    image: 'commercial-image.png',
+    imageAlt: 'Commercial Refrigeration Emergency',
+    useCalendar: false,
+    showSpoilageWarning: true,
+    stats: [
+      { number: '$549', text: 'commercial rate' },
+      { number: 'Priority', text: 'response' },
+      { number: 'MPI', text: 'compliant' },
+      { number: '24/7', text: 'service' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'critical',
+        title: 'CRITICAL - Total Failure',
+        time: '30 minutes',
+        description: 'Complete cooling loss - stock at immediate risk',
+        price: '$749',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_critical_commercial'
+      },
+      {
+        id: 'emergency',
+        title: 'Emergency - Rising Temps',
+        time: '60 minutes',
+        description: 'Temperature rising - compliance at risk',
+        price: '$549',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_emergency_commercial'
+      },
+      {
+        id: 'scheduled',
+        title: 'Scheduled Service',
+        time: 'Within 24 hours',
+        description: 'Non-emergency maintenance',
+        price: '$449',
+        stripeUrl: 'https://buy.stripe.com/coolth_scheduled_commercial'
+      }
+    ],
+    spoilageWarning: `
+      <h3>🚨 STOCK LOSS PREVENTION</h3>
+      <p>Every minute counts - thousands in stock at risk!</p>
+      <p>MPI compliance requirements: Maintain cold chain</p>
+    `,
+    infoContent: `
+      <h4>Commercial Emergency Response:</h4>
+      <ul>
+        <li><strong>Priority dispatch</strong> for businesses</li>
+        <li><strong>All commercial equipment</strong> serviced</li>
+        <li><strong>Temperature logging</strong> for compliance</li>
+        <li><strong>Temporary cooling</strong> solutions available</li>
+        <li><strong>Insurance documentation</strong> provided</li>
+      </ul>
+    `,
+    terms: [
+      'Priority commercial response guaranteed',
+      'Compliance documentation provided',
+      'Parts and refrigerant charged at commercial rates',
+      'Service contracts available for regular maintenance'
+    ]
+  },
+  'coolroom': {
+    title: 'Cool Room & Walk-In Freezer Emergency',
+    subtitle: 'Rapid response for walk-in cooling emergencies',
+    breadcrumb: 'Cool Room Emergency',
+    bookingTitle: 'Cool Room Emergency Service',
+    bookingDescription: 'Walk-in cooler/freezer rescue • Priority dispatch',
+    step1Title: 'Step 1: Describe your cool room emergency',
+    detailsLabel: 'Cool room details and problem:',
+    detailsPlaceholder: 'e.g., Size of room, current temperature, type of stock stored, when problem started',
+    image: 'coolroom-image.png',
+    imageAlt: 'Cool Room Emergency Service',
+    useCalendar: false,
+    showSpoilageWarning: true,
+    stats: [
+      { number: '$749', text: 'emergency rate' },
+      { number: '30', text: 'min response' },
+      { number: 'Large', text: 'equipment' },
+      { number: 'Priority', text: 'dispatch' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'critical',
+        title: 'CRITICAL - Complete Failure',
+        time: '30 minutes',
+        description: 'Total cooling loss - immediate response required',
+        price: '$949',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_critical_coolroom'
+      },
+      {
+        id: 'emergency',
+        title: 'Emergency - Partial Cooling',
+        time: '60 minutes',
+        description: 'Temperature climbing - stock at risk',
+        price: '$749',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_emergency_coolroom'
+      }
+    ],
+    spoilageWarning: `
+      <h3>⚠️ COOL ROOM EMERGENCY</h3>
+      <p>Large volume stock loss imminent!</p>
+      <p>Priority response for walk-in coolers & freezers</p>
+    `,
+    infoContent: `
+      <h4>Cool Room Emergency Service:</h4>
+      <ul>
+        <li><strong>Rapid response team</strong> for cool rooms</li>
+        <li><strong>Industrial refrigeration</strong> specialists</li>
+        <li><strong>Evaporator & condensing unit</strong> repairs</li>
+        <li><strong>Emergency defrost</strong> procedures</li>
+        <li><strong>Backup cooling</strong> options available</li>
+      </ul>
+    `,
+    terms: [
+      'Emergency cool room service includes rapid diagnosis',
+      'Industrial equipment repair rates apply',
+      'Temporary cooling solutions available',
+      'Priority dispatch for food safety emergencies'
+    ]
+  },
+  'display': {
+    title: 'Display Case & Deli Cabinet Emergency',
+    subtitle: 'Keep your retail refrigeration running',
+    breadcrumb: 'Display Case Repair',
+    bookingTitle: 'Display Case Emergency Service',
+    bookingDescription: 'Retail refrigeration rescue • Compliance maintained',
+    step1Title: 'Step 1: Describe your display case problem',
+    detailsLabel: 'Type of display unit and issue:',
+    detailsPlaceholder: 'e.g., Deli case not cooling, butcher display fogging, bakery cabinet warm, drink fridge down',
+    image: 'display-image.png',
+    imageAlt: 'Display Case Emergency Service',
+    useCalendar: false,
+    stats: [
+      { number: '$449', text: 'callout' },
+      { number: '60', text: 'min arrival' },
+      { number: 'Retail', text: 'specialist' },
+      { number: 'All', text: 'brands' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'emergency',
+        title: 'Emergency - Not Cooling',
+        time: '60 minutes',
+        description: 'Display stock at risk - compliance issue',
+        price: '$549',
+        isEmergency: true,
+        stripeUrl: 'https://buy.stripe.com/coolth_emergency_display'
+      },
+      {
+        id: 'urgent',
+        title: 'Urgent Service',
+        time: '2-3 hours',
+        description: 'Temperature issues or condensation',
+        price: '$449',
+        stripeUrl: 'https://buy.stripe.com/coolth_urgent_display'
+      }
+    ],
+    infoContent: `
+      <h4>Display Case Service Includes:</h4>
+      <ul>
+        <li><strong>All display types</strong> serviced</li>
+        <li><strong>Anti-fog system</strong> repairs</li>
+        <li><strong>LED lighting</strong> fixes</li>
+        <li><strong>Temperature compliance</strong> checks</li>
+        <li><strong>Same-day service</strong> available</li>
+      </ul>
+    `,
+    terms: [
+      'Display case emergency service',
+      'Food safety compliance maintained',
+      'Parts availability for major brands',
+      'Service contracts available'
+    ]
+  },
+  'ice-machine': {
+    title: 'Ice Machine Emergency Breakdown',
+    subtitle: 'Get your ice production running again',
+    breadcrumb: 'Ice Machine Service',
+    bookingTitle: 'Ice Machine Emergency Service',
+    bookingDescription: 'Restaurant & bar ice machine rescue',
+    step1Title: 'Step 1: Describe your ice machine problem',
+    detailsLabel: 'Ice machine type and issue:',
+    detailsPlaceholder: 'e.g., Not making ice, ice too small, machine leaking, strange taste, not dispensing',
+    image: 'ice-image.png',
+    imageAlt: 'Ice Machine Emergency Service',
+    useCalendar: false,
+    stats: [
+      { number: '$399', text: 'fixed rate' },
+      { number: '2-3', text: 'hour response' },
+      { number: 'All', text: 'ice types' },
+      { number: 'Deep', text: 'cleaning' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'emergency',
+        title: 'Emergency - No Ice',
+        time: '2-3 hours',
+        description: 'Complete ice production failure',
+        price: '$499',
+        stripeUrl: 'https://buy.stripe.com/coolth_emergency_ice'
+      },
+      {
+        id: 'standard',
+        title: 'Standard Service',
+        time: 'Same day',
+        description: 'Reduced production or quality issues',
+        price: '$399',
+        stripeUrl: 'https://buy.stripe.com/coolth_standard_ice'
+      }
+    ],
+    infoContent: `
+      <h4>Ice Machine Service:</h4>
+      <ul>
+        <li><strong>All ice machine brands</strong> serviced</li>
+        <li><strong>Water system</strong> diagnosis</li>
+        <li><strong>Deep cleaning</strong> & sanitization</li>
+        <li><strong>Production restoration</strong></li>
+        <li><strong>Water quality</strong> testing</li>
+      </ul>
+    `,
+    terms: [
+      'Ice machine service includes cleaning',
+      'Water filters charged separately if needed',
+      'Same-day service available',
+      'Maintenance contracts available'
+    ]
+  },
+  'hvac-maintenance': {
+    title: 'HVAC Maintenance Service',
+    subtitle: 'Professional heat pump & AC maintenance - Fixed $450',
+    breadcrumb: 'HVAC Maintenance',
+    bookingTitle: 'HVAC Maintenance Booking',
+    bookingDescription: 'Complete heat pump & AC service • Fixed $450 + GST',
+    step1Title: 'Step 1: Tell us about your HVAC system',
+    step1Label: 'Location',
+    step2Label: 'Date & Time',
+    step2Title: 'Step 2: Select your preferred date and time',
+    detailsLabel: 'System details and any specific concerns:',
+    detailsPlaceholder: 'e.g., Brand/model of heat pump, number of units, any specific issues, when last serviced',
+    locationPlaceholder: 'Enter service address',
+    image: 'hvac-image.png',
+    imageAlt: 'HVAC Maintenance Service',
+    useCalendar: true,
+    showReservationTimer: true,
+    stats: [
+      { number: '$450', text: 'fixed price' },
+      { number: 'Full', text: 'service' },
+      { number: '12-month', text: 'warranty' },
+      { number: 'All', text: 'brands' }
+    ],
+    urgencyOptions: [
+      {
+        id: 'maintenance',
+        title: 'HVAC Maintenance',
+        time: 'Scheduled appointment',
+        description: 'Complete heat pump/AC service',
+        price: '$450 + GST',
+        stripeUrl: 'https://buy.stripe.com/coolth_hvac_maintenance'
+      }
+    ],
+    infoContent: `
+      <h4>HVAC Maintenance Includes:</h4>
+      <ul>
+        <li><strong>Complete system check</strong> & diagnostics</li>
+        <li><strong>Deep clean</strong> indoor & outdoor units</li>
+        <li><strong>Refrigerant check</strong> & top-up if needed</li>
+        <li><strong>Filter cleaning</strong> or replacement</li>
+        <li><strong>Electrical inspection</strong> & testing</li>
+        <li><strong>12-month warranty</strong> on service</li>
+      </ul>
+      <p style="margin-top: 15px;"><strong>🏷️ FIXED PRICE: $450 + GST</strong> - No hidden fees!</p>
+    `,
+    terms: [
+      'Fixed price of $450 + GST for standard maintenance',
+      '12-month warranty on service work',
+      'Additional repairs quoted separately',
+      'Cancellations require 24 hours notice'
+    ]
+  }
+};
+
+// Initialize page based on URL parameters
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const service = urlParams.get('service') || 'home-fridge';
+  
+  loadServiceConfig(service);
+});
+
+function loadServiceConfig(serviceType) {
+  const config = serviceConfigs[serviceType] || serviceConfigs['home-fridge'];
+  
+  // Update page metadata
+  document.title = `${config.title} - Coolth Emergency Refrigeration`;
+  document.getElementById('pageDescription').content = `Book ${config.title.toLowerCase()} with Coolth. ${config.bookingDescription}`;
+  
+  // Update header
+  document.getElementById('headerImage').src = '/coolth-logo.png';
+  document.getElementById('headerImage').alt = config.imageAlt;
+  document.getElementById('headerTitle').textContent = config.title;
+  document.getElementById('headerSubtitle').textContent = config.subtitle;
+  
+  // Update breadcrumb
+  document.getElementById('breadcrumbText').textContent = config.breadcrumb;
+  
+  // Update booking header
+  document.getElementById('bookingTitle').textContent = config.bookingTitle;
+  document.getElementById('bookingDescription').textContent = config.bookingDescription;
+  
+  // Update stats
+  if (config.stats) {
+    const statsContainer = document.getElementById('statsContent');
+    statsContainer.innerHTML = config.stats.map(stat => `
+      <div class="stat-item">
+        <span class="stat-number">${stat.number}</span>
+        ${stat.text}
+      </div>
+    `).join('');
+    document.getElementById('serviceStats').style.display = 'block';
+  }
+  
+  // Show spoilage warning for emergency services
+  if (config.showSpoilageWarning && config.spoilageWarning) {
+    const warningDiv = document.getElementById('spoilageWarning');
+    warningDiv.innerHTML = config.spoilageWarning;
+    warningDiv.style.display = 'block';
+  }
+  
+  // Update step 1
+  document.getElementById('step1Title').textContent = config.step1Title;
+  document.getElementById('detailsLabel').textContent = config.detailsLabel;
+  document.getElementById('detailsInput').placeholder = config.detailsPlaceholder;
+  document.getElementById('serviceInfoBox').innerHTML = config.infoContent;
+  
+  // Update location placeholder if specified
+  if (config.locationPlaceholder) {
+    document.getElementById('locationInput').placeholder = config.locationPlaceholder;
+  }
+  
+  // Update progress labels if needed
+  if (config.step1Label) {
+    document.getElementById('step1Label').textContent = config.step1Label;
+  }
+  if (config.step2Label) {
+    document.getElementById('step2Label').textContent = config.step2Label;
+  }
+  
+  // Configure step 2 based on service type
+  if (config.useCalendar) {
+    // For HVAC maintenance - use calendar
+    document.getElementById('step2Title').textContent = config.step2Title || 'Step 2: Select your preferred date and time';
+    document.getElementById('nextButton').textContent = 'Next: Select Date & Time';
+  } else {
+    // For emergency services - use urgency options
+    document.getElementById('step2Title').textContent = 'Step 2: How urgent is your situation?';
+    document.getElementById('nextButton').textContent = 'Next: Select Urgency';
+    
+    // Update urgency options with emergency styling
+    const urgencyContainer = document.getElementById('urgencyOptions');
+    urgencyContainer.innerHTML = config.urgencyOptions.map(option => `
+      <div class="urgency-option ${option.isEmergency ? 'emergency' : ''}" data-urgency="${option.id}" onclick="selectUrgency('${option.id}', '${option.title}', '${option.time}', '${option.price}', this)">
+        <div class="urgency-title">${option.title}</div>
+        <div class="urgency-time">${option.time}</div>
+        <div class="urgency-description">${option.description}</div>
+        <div style="margin-top: 8px; font-weight: bold; color: ${option.isEmergency ? '#ff6b35' : '#00b4d8'};">${option.price}</div>
+      </div>
+    `).join('');
+  }
+  
+  // Update terms
+  const termsList = document.getElementById('termsList');
+  termsList.innerHTML = config.terms.map(term => `<li>${term}</li>`).join('');
+  
+  // Store service type globally
+  window.currentService = serviceType;
+  window.currentConfig = config;
+}
+
+// Calendar and date/time selection for HVAC maintenance
+let selectedDate = null;
+let selectedTime = null;
+let reservationExpiry = null;
+let slotsRemaining = {};
+let bookingTimer = null;
+
+// Initialize slots for HVAC scheduling
+document.addEventListener('DOMContentLoaded', function() {
+  const lastVisit = localStorage.getItem('coolth_last_visit');
+  const today = new Date().toDateString();
+  
+  if (lastVisit === today) {
+    const existingSlots = localStorage.getItem('coolth_slots_today');
+    if (existingSlots) {
+      slotsRemaining = JSON.parse(existingSlots);
+      Object.keys(slotsRemaining).forEach(key => {
+        slotsRemaining[key] = Math.max(1, slotsRemaining[key] - 1);
+      });
+    } else {
+      generateRandomSlots();
+    }
+  } else {
+    generateRandomSlots();
+  }
+  
+  localStorage.setItem('coolth_last_visit', today);
+  localStorage.setItem('coolth_slots_today', JSON.stringify(slotsRemaining));
+});
+
+function generateRandomSlots() {
+  const times = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+  times.forEach(time => {
+    slotsRemaining[time] = Math.floor(Math.random() * 3) + 1; // 1-3 slots for HVAC
+  });
+}
+
+function updateAvailabilityStatus() {
+  const totalSlotsToday = Object.values(slotsRemaining).reduce((a, b) => a + b, 0);
+  const alertDiv = document.getElementById('availabilityAlert');
+  
+  if (totalSlotsToday <= 4) {
+    alertDiv.style.display = 'block';
+    alertDiv.className = 'availability-alert urgent';
+    alertDiv.innerHTML = `⚠️ Limited availability! Only ${totalSlotsToday} HVAC service slots remaining today.`;
+  } else {
+    alertDiv.style.display = 'block';
+    alertDiv.className = 'availability-alert';
+    alertDiv.innerHTML = `📅 ${totalSlotsToday} HVAC maintenance slots available. Book now for $450 fixed price.`;
+  }
+}
+
+function initializeCalendars() {
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+  const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+  const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+  
+  generateCalendar(currentMonth, currentYear, 'currentCalendar');
+  generateCalendar(nextMonth, nextYear, 'nextCalendar');
+}
+
+function generateCalendar(month, year, containerId) {
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  
+  const container = document.getElementById(containerId);
+  const calendar = container.querySelector('.calendar-grid');
+  const header = container.querySelector('h4');
+  
+  header.textContent = `${monthNames[month]} ${year}`;
+  calendar.innerHTML = '';
+  
+  dayNames.forEach(day => {
+    const dayHeader = document.createElement('div');
+    dayHeader.className = 'day-header';
+    dayHeader.textContent = day;
+    calendar.appendChild(dayHeader);
+  });
+  
+  for (let i = 0; i < firstDay; i++) {
+    const emptyDay = document.createElement('div');
+    emptyDay.className = 'day disabled';
+    calendar.appendChild(emptyDay);
+  }
+  
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayElement = document.createElement('div');
+    dayElement.className = 'day';
+    dayElement.textContent = day;
+    
+    const currentDate = new Date(year, month, day);
+    const isPast = currentDate < today.setHours(0,0,0,0);
+    
+    if (isPast) {
+      dayElement.classList.add('past');
+    } else {
+      dayElement.onclick = () => selectDate(year, month, day, dayElement);
+    }
+    
+    calendar.appendChild(dayElement);
+  }
+}
+
+function selectDate(year, month, day, element) {
+  document.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  selectedDate = new Date(year, month, day);
+  selectedTime = null;
+  document.querySelectorAll('.time-slot.selected').forEach(el => el.classList.remove('selected'));
+  document.getElementById('confirmUrgencyBtn').disabled = true;
+  
+  showTimeSlots();
+  
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('selectedDateDisplay').textContent = selectedDate.toLocaleDateString('en-NZ', options);
+}
+
+function showTimeSlots() {
+  const container = document.getElementById('timeSlotContainer');
+  const slotsDiv = document.getElementById('timeSlots');
+  
+  container.style.display = 'block';
+  
+  const times = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+  
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const isToday = selectedDate.getTime() === today.getTime();
+  
+  slotsDiv.innerHTML = '';
+  
+  times.forEach(time => {
+    const slot = document.createElement('div');
+    slot.className = 'time-slot';
+    
+    let isWithinTwoHours = false;
+    if (isToday) {
+      const timeStr = time.replace(' AM', '').replace(' PM', '');
+      let [hours, minutes] = timeStr.split(':').map(Number);
+      
+      if (time.includes('PM') && hours !== 12) {
+        hours += 12;
+      } else if (time.includes('AM') && hours === 12) {
+        hours = 0;
+      }
+      
+      const slotTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes || 0);
+      const twoHoursFromNow = new Date(now.getTime() + (2 * 60 * 60 * 1000));
+      
+      isWithinTwoHours = slotTime < twoHoursFromNow;
+    }
+    
+    const remaining = slotsRemaining[time] || 1;
+    
+    if (remaining <= 1) {
+      slot.classList.add('limited');
+    }
+    
+    if (isWithinTwoHours) {
+      slot.classList.add('past');
+      slot.style.cursor = 'not-allowed';
+      slot.innerHTML = `
+        <div>${time}</div>
+        <div class="availability">Too soon</div>
+      `;
+    } else {
+      slot.innerHTML = `
+        <div>${time}</div>
+        <div class="availability">${remaining} slot${remaining === 1 ? '' : 's'} left</div>
+      `;
+      slot.onclick = () => selectTimeSlot(time, slot);
+    }
+    
+    slotsDiv.appendChild(slot);
+  });
+  
+  updateAvailabilityStatus();
+}
+
+function selectTimeSlot(time, element) {
+  document.querySelectorAll('.time-slot.selected').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  selectedTime = time;
+  reservationExpiry = new Date(Date.now() + 10 * 60 * 1000);
+  
+  document.getElementById('confirmUrgencyBtn').disabled = false;
+}
+
+function startReservationTimer() {
+  const endTime = new Date().getTime() + (10 * 60 * 1000);
+  
+  if (bookingTimer) {
+    clearInterval(bookingTimer);
+  }
+  
+  bookingTimer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = endTime - now;
+    
+    if (distance < 0) {
+      clearInterval(bookingTimer);
+      document.getElementById('reservationTimer').innerHTML = 'EXPIRED';
+      document.getElementById('reservationTimer').style.color = '#dc3545';
+      return;
+    }
+    
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    const timerElement = document.getElementById('reservationTimer');
+    timerElement.innerHTML = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (distance < 2 * 60 * 1000) {
+      timerElement.style.color = '#dc3545';
+    }
+  }, 1000);
+}
+
+// Standard urgency selection
+let selectedUrgency = null;
+let selectedUrgencyDetails = {};
+
+function selectUrgency(urgencyId, title, time, price, element) {
+  document.querySelectorAll('.urgency-option.selected').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  selectedUrgency = urgencyId;
+  selectedUrgencyDetails = { title, time, price };
+  
+  document.getElementById('confirmUrgencyBtn').disabled = false;
+}
+
+function goToStep1() {
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  
+  document.querySelectorAll('.progress-step').forEach(el => {
+    el.classList.remove('active', 'completed');
+  });
+  document.getElementById('step1-progress').classList.add('active');
+}
+
+function goToStep2() {
+  const location = document.getElementById('locationInput').value.trim();
+  
+  if (!location) {
+    alert('Please enter the service location');
+    return;
+  }
+  
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step2').classList.add('active');
+  
+  document.getElementById('step1-progress').classList.add('completed');
+  document.getElementById('step1-progress').classList.remove('active');
+  document.getElementById('step2-progress').classList.add('active');
+  
+  if (window.currentConfig.useCalendar) {
+    document.getElementById('urgencyOptions').style.display = 'none';
+    document.getElementById('calendarSection').style.display = 'block';
+    initializeCalendars();
+  } else {
+    document.getElementById('urgencyOptions').style.display = 'block';
+    document.getElementById('calendarSection').style.display = 'none';
+  }
+}
+
+function goToStep3() {
+  if (window.currentConfig.useCalendar) {
+    if (!selectedDate || !selectedTime) {
+      alert('Please select both a date and time');
+      return;
+    }
+    
+    if (reservationExpiry && new Date() > reservationExpiry) {
+      alert('Your time slot reservation has expired. Please select a new time slot.');
+      selectedTime = null;
+      document.querySelectorAll('.time-slot.selected').forEach(el => el.classList.remove('selected'));
+      document.getElementById('confirmUrgencyBtn').disabled = true;
+      return;
+    }
+  } else {
+    if (!selectedUrgency) {
+      alert('Please select an urgency level');
+      return;
+    }
+  }
+  
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step3').classList.add('active');
+  
+  document.getElementById('step2-progress').classList.add('completed');
+  document.getElementById('step2-progress').classList.remove('active');
+  document.getElementById('step3-progress').classList.add('active');
+  
+  updateSummary();
+  
+  if (window.currentConfig.showReservationTimer) {
+    document.getElementById('reservationTimerSection').style.display = 'block';
+    startReservationTimer();
+  }
+}
+
+function updateSummary() {
+  document.getElementById('summaryService').textContent = window.currentConfig.title;
+  document.getElementById('summaryLocation').textContent = document.getElementById('locationInput').value;
+  
+  if (window.currentConfig.useCalendar) {
+    document.getElementById('urgencyRow').style.display = 'none';
+    document.getElementById('dateRow').style.display = 'flex';
+    document.getElementById('timeRow').style.display = 'flex';
+    
+    if (selectedDate) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('summaryDate').textContent = selectedDate.toLocaleDateString('en-NZ', options);
+    }
+    document.getElementById('summaryTime').textContent = selectedTime || 'Not selected';
+    document.getElementById('summaryPrice').textContent = window.currentConfig.urgencyOptions[0].price;
+  } else {
+    document.getElementById('urgencyRow').style.display = 'flex';
+    document.getElementById('dateRow').style.display = 'none';
+    document.getElementById('timeRow').style.display = 'none';
+    
+    document.getElementById('summaryUrgency').textContent = `${selectedUrgencyDetails.title} (${selectedUrgencyDetails.time})`;
+    document.getElementById('summaryPrice').textContent = selectedUrgencyDetails.price;
+  }
+  
+  const callBtn = document.getElementById('callToBookBtn');
+  const price = window.currentConfig.useCalendar ? 
+    window.currentConfig.urgencyOptions[0].price : 
+    selectedUrgencyDetails.price;
+  callBtn.textContent = `Book Now & Pay ${price}`;
+}
+
+function toggleBookingButton() {
+  // Handle terms checkbox change
+}
+
+function trackConversion(event, type) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-COOLTH_ID/' + event,
+      'value': 1.0,
+      'currency': 'NZD'
+    });
+  }
+}
+
+function proceedToPayment() {
+  const termsChecked = document.getElementById('termsAgree').checked;
+  const location = document.getElementById('locationInput').value.trim();
+  
+  if (!termsChecked) {
+    alert('Please accept the terms and conditions to proceed');
+    return;
+  }
+  
+  if (!location) {
+    alert('Please complete all required fields');
+    return;
+  }
+  
+  if (window.currentConfig.useCalendar) {
+    if (!selectedDate || !selectedTime) {
+      alert('Please select both a date and time');
+      return;
+    }
+  } else {
+    if (!selectedUrgency) {
+      alert('Please select an urgency level');
+      return;
+    }
+  }
+  
+  trackConversion(`${window.currentService}_booking_payment`, 'Purchase');
+  
+  let stripeUrl;
+  if (window.currentConfig.useCalendar) {
+    stripeUrl = window.currentConfig.urgencyOptions[0].stripeUrl;
+  } else {
+    const selectedOption = window.currentConfig.urgencyOptions.find(option => option.id === selectedUrgency);
+    stripeUrl = selectedOption ? selectedOption.stripeUrl : null;
+  }
+  
+  if (stripeUrl) {
+    window.location.href = stripeUrl;
+  } else {
+    const price = window.currentConfig.useCalendar ? 
+      window.currentConfig.urgencyOptions[0].price : 
+      selectedUrgencyDetails.price;
+    alert(`Booking confirmed!\n\nService: ${window.currentConfig.title}\nLocation: ${location}\nPrice: ${price}\n\nPlease call 0800 600 506 to complete payment.`);
+  }
+}
+
+// Add urgency timer for emergency services
+if (!window.currentConfig || !window.currentConfig.useCalendar) {
+  let pageLoadTime = Date.now();
+  setInterval(function() {
+    const timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000);
+    if (timeOnPage === 90 && window.currentService !== 'hvac-maintenance') {
+      const urgencyAlert = confirm('⚠️ Your refrigeration is still not working!\n\nEvery minute counts to save your food/stock.\n\nCall us now for immediate assistance?');
+      if (urgencyAlert) {
+        window.location.href = 'tel:0800600506';
+      }
+    }
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
