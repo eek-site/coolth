@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Portal - Join Coolth Emergency Refrigeration Network | NZ-Wide Coverage</title>
+  <meta name="description" content="Join Coolth's nationwide refrigeration partner network. Provide emergency fridge repair, commercial chiller service, HVAC maintenance across New Zealand. RLNZ certified technicians wanted." />
+  <meta name="keywords" content="refrigeration technician jobs, RLNZ certified partner, emergency fridge repair contractor, commercial refrigeration network, HVAC technician partnership NZ" />
+  <meta property="og:title" content="Partner Portal - Join Coolth Refrigeration Network" />
+  <meta property="og:description" content="Partner with Coolth Emergency Refrigeration to provide 24/7 cooling services nationwide. High demand, competitive rates, emergency callouts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.coolth.tech/partner" />
+  <meta property="og:image" content="https://www.coolth.tech/partner-og-image.jpg" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-COOLTH_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-COOLTH_ID');
+    gtag('config', 'G-COOLTH_GA_ID');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Coolth Emergency Refrigeration Partner Network",
+    "description": "Join New Zealand's premier emergency refrigeration network. Providing 24/7 cooling services, HVAC maintenance, and commercial refrigeration nationwide.",
+    "telephone": "+6408000600506",
+    "url": "https://www.coolth.tech/partner",
+    "parentOrganization": {
+      "@type": "LocalBusiness",
+      "name": "Coolth Emergency Refrigeration"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "New Zealand"
+    }
+  }
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+      color: white;
+      padding: 60px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(-100px) translateY(-100px); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header .subtitle {
+      font-size: 1.3em;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    .emergency-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b35, #f72585);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      animation: urgentPulse 2s infinite;
+    }
+
+    @keyframes urgentPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,107,53,0.3); }
+      50% { box-shadow: 0 0 40px rgba(255,107,53,0.6); }
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .cta-button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Navigation */
+    .nav {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+    }
+
+    .nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 25px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav a:hover {
+      color: #00b4d8;
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00b4d8;
+      transition: width 0.3s ease;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .service-card.emergency {
+      border: 2px solid #ff6b35;
+    }
+
+    .service-card.emergency::before {
+      background: linear-gradient(90deg, #ff6b35, #f72585);
+    }
+
+    .service-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .service-card p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      list-style: none;
+    }
+
+    .service-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      color: #555;
+    }
+
+    .service-features li:last-child {
+      border-bottom: none;
+    }
+
+    .price-tag {
+      background: linear-gradient(135deg, #06ffa5, #00c896);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Requirements Section */
+    .requirements {
+      background: white;
+    }
+
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .requirement-item {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      border-left: 5px solid #00b4d8;
+      transition: all 0.3s ease;
+    }
+
+    .requirement-item:hover {
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .requirement-item h4 {
+      color: #00b4d8;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    /* Application Form */
+    .application-form {
+      background: linear-gradient(135deg, #0077b6, #023e8a);
+      color: white;
+    }
+
+    .form-container {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 50px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Current Partners Section */
+    .current-partners {
+      background: #f8f9fa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #001f3f;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #00b4d8;
+      text-decoration: none;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-container {
+        padding: 30px 20px;
+      }
+      
+      .nav-content {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="emergency-badge">🚨 HIGH DEMAND - TECHNICIANS NEEDED NOW</div>
+      <h1>Join the Coolth Partner Network</h1>
+      <p class="subtitle">Partner with New Zealand's leading emergency refrigeration service</p>
+      <a href="#application" class="cta-button">Apply Now</a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-content">
+      <a href="#services">Services</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#existing-partners">Current Partners</a>
+      <a href="#application">Apply</a>
+      <a href="tel:0800600506">0800 600 506</a>
+    </div>
+  </div>
+</nav>
+
+<section id="services" class="section">
+  <div class="container">
+    <h2 class="section-title">Service Areas We Need Partners For</h2>
+    <p class="section-subtitle">Coolth is rapidly expanding across New Zealand. We urgently need RLNZ-certified refrigeration technicians to meet growing emergency demand.</p>
+    
+    <div class="services-grid">
+      <div class="service-card emergency">
+        <span class="service-icon">🚨</span>
+        <h3>Emergency Fridge/Freezer Repair</h3>
+        <p>24/7 emergency response for domestic refrigeration failures. High-priority callouts with premium rates.</p>
+        <ul class="service-features">
+          <li>30-60 minute response target</li>
+          <li>All major brands covered</li>
+          <li>Compressor & thermostat repairs</li>
+          <li>After-hours premium rates</li>
+        </ul>
+        <span class="price-tag">$249-$349 per callout</span>
+      </div>
+
+      <div class="service-card emergency">
+        <span class="service-icon">🏪</span>
+        <h3>Commercial Chiller Rescue</h3>
+        <p>Priority response for cafés, dairies, restaurants. Prevent stock losses with rapid intervention.</p>
+        <ul class="service-features">
+          <li>MPI compliance maintained</li>
+          <li>Temperature documentation</li>
+          <li>All commercial equipment</li>
+          <li>Insurance documentation</li>
+        </ul>
+        <span class="price-tag">$549-$749 per callout</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🥶</span>
+        <h3>Cool Room & Walk-In Service</h3>
+        <p>Large-scale refrigeration for hospitality and retail. Specialized equipment and expertise required.</p>
+        <ul class="service-features">
+          <li>Industrial refrigeration systems</li>
+          <li>Evaporator & condensing units</li>
+          <li>Door seals & panels</li>
+          <li>Emergency defrost procedures</li>
+        </ul>
+        <span class="price-tag">$749-$949 per service</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🥩</span>
+        <h3>Display Case Specialist</h3>
+        <p>Retail display refrigeration for butchers, delis, bakeries. Maintain presentation and compliance.</p>
+        <ul class="service-features">
+          <li>Anti-fog system repairs</li>
+          <li>LED lighting fixes</li>
+          <li>Temperature compliance</li>
+          <li>Glass door adjustments</li>
+        </ul>
+        <span class="price-tag">$449-$549 per service</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🧊</span>
+        <h3>Ice Machine Service</h3>
+        <p>Restaurant and bar ice machine repairs. All types: cube, flake, nugget ice makers.</p>
+        <ul class="service-features">
+          <li>Water system diagnosis</li>
+          <li>Deep cleaning & sanitization</li>
+          <li>Control board repairs</li>
+          <li>Production restoration</li>
+        </ul>
+        <span class="price-tag">$399-$499 per service</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🌡️</span>
+        <h3>HVAC Maintenance</h3>
+        <p>Scheduled heat pump and AC servicing. Fixed-price maintenance program.</p>
+        <ul class="service-features">
+          <li>Complete system check</li>
+          <li>Filter cleaning/replacement</li>
+          <li>Refrigerant top-up included</li>
+          <li>12-month warranty</li>
+        </ul>
+        <span class="price-tag">$450 fixed price</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="requirements" class="section requirements">
+  <div class="container">
+    <h2 class="section-title">Partner Requirements</h2>
+    <p class="section-subtitle">To maintain Coolth's reputation for quality emergency service, all partners must meet our stringent standards.</p>
+    
+    <div class="requirements-grid">
+      <div class="requirement-item">
+        <h4>RLNZ Certification</h4>
+        <p>Current Refrigerant License New Zealand certification required for all refrigerant handling. Must maintain compliance with RLNZ regulations and safety standards.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Professional Qualifications</h4>
+        <p>Trade qualification in refrigeration/air conditioning, or equivalent experience. Commercial refrigeration experience highly valued.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Emergency Availability</h4>
+        <p>Ability to respond to emergency callouts within 30-60 minutes. After-hours and weekend availability for premium rate work.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Insurance & Compliance</h4>
+        <p>Public liability insurance minimum $2M, professional indemnity cover, and full health & safety compliance.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Equipment & Tools</h4>
+        <p>Full refrigeration toolkit including gauges, vacuum pump, leak detector, temperature loggers, and refrigerant recovery equipment.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Vehicle Requirements</h4>
+        <p>Reliable service vehicle with secure refrigerant storage, proper ventilation, and professional presentation.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>Technology Setup</h4>
+        <p>Smartphone for dispatch system, GPS tracking, photo documentation, and real-time customer communication.</p>
+      </div>
+
+      <div class="requirement-item">
+        <h4>MPI Knowledge</h4>
+        <p>Understanding of MPI food safety requirements for commercial work. Ability to maintain cold chain compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="existing-partners" class="section current-partners">
+  <div class="container">
+    <h2 class="section-title">Current Partners</h2>
+    <p class="section-subtitle">Already part of the Coolth network? Access your partner tools and resources here.</p>
+    
+    <div class="services-grid">
+      <div class="service-card" style="border-left: 5px solid #06ffa5;">
+        <span class="service-icon">📁</span>
+        <h3>Upload Documents</h3>
+        <p>Submit service reports, invoices, RLNZ certificates, and temperature logs through our secure portal.</p>
+        <ul class="service-features">
+          <li>Service completion reports</li>
+          <li>Temperature documentation</li>
+          <li>Refrigerant usage logs</li>
+          <li>Emergency response records</li>
+        </ul>
+        <div style="margin-top: 20px;">
+          <a href="/partner-upload" 
+             style="background: linear-gradient(135deg, #06ffa5, #00c896); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+            Upload Documents
+          </a>
+        </div>
+      </div>
+
+      <div class="service-card" style="border-left: 5px solid #00b4d8;">
+        <span class="service-icon">📞</span>
+        <h3>Partner Support</h3>
+        <p>24/7 technical support for emergency callouts, payment queries, and dispatch assistance.</p>
+        <ul class="service-features">
+          <li>Emergency dispatch support</li>
+          <li>Technical assistance</li>
+          <li>Payment inquiries</li>
+          <li>Job scheduling help</li>
+        </ul>
+        <div style="margin-top: 20px;">
+          <a href="tel:0800600506" 
+             style="background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+            Call Support
+          </a>
+        </div>
+      </div>
+
+      <div class="service-card" style="border-left: 5px solid #7209b7;">
+        <span class="service-icon">📋</span>
+        <h3>Training & Resources</h3>
+        <p>Access technical bulletins, MPI compliance guides, and Coolth service standards.</p>
+        <ul class="service-features">
+          <li>Technical manuals</li>
+          <li>Compliance guides</li>
+          <li>Safety protocols</li>
+          <li>Brand standards</li>
+        </ul>
+        <div style="margin-top: 20px;">
+          <a href="/partner-terms" 
+             target="_blank"
+             style="background: linear-gradient(135deg, #7209b7, #560bad); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+            View Resources
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 40px; border-radius: 20px; margin-top: 40px; text-align: center;">
+      <h3 style="color: white; margin-bottom: 20px;">Already a Partner?</h3>
+      <p style="font-size: 1.1em; margin-bottom: 25px; opacity: 0.95;">
+        Thank you for being part of the Coolth emergency response team! Use the tools above to manage your account and submit documentation.
+      </p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="/partner-upload" 
+           style="background: rgba(255,255,255,0.2); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+          Upload Documents
+        </a>
+        <a href="/partner-upload?emergency=true" 
+           style="background: linear-gradient(135deg, #ff6b35, #f72585); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+          Emergency Upload
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="benefits" class="section">
+  <div class="container">
+    <h2 class="section-title">Why Partner With Coolth?</h2>
+    <p class="section-subtitle">Join New Zealand's premier emergency refrigeration network and grow your business.</p>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">💰</span>
+        <h3>Premium Emergency Rates</h3>
+        <p>After-hours and emergency callouts command premium rates. Weekend and holiday surcharges apply.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📈</span>
+        <h3>Constant Demand</h3>
+        <p>Refrigeration emergencies happen 24/7. Never worry about finding work with our steady job flow.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🎯</span>
+        <h3>High-Value Work</h3>
+        <p>Commercial jobs average $500-$900. Focus on profitable emergency work, not routine maintenance.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🛠️</span>
+        <h3>Technical Support</h3>
+        <p>24/7 technical backup, access to manufacturer bulletins, and peer support network.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🏷️</span>
+        <h3>Brand Power</h3>
+        <p>Leverage Coolth's growing reputation and marketing spend to build your local presence.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📱</span>
+        <h3>Modern Systems</h3>
+        <p>Advanced dispatch, GPS tracking, digital payments, and automated invoicing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="application" class="section application-form">
+  <div class="container">
+    <h2 class="section-title">Apply to Join Our Network</h2>
+    <p class="section-subtitle">Ready to partner with Coolth? Complete our application and we'll respond within 24 hours.</p>
+    
+    <div class="form-container">
+      <div class="terms-notice" style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #00b4d8;">
+        <h3 style="color: white; margin-bottom: 15px;">Before You Apply</h3>
+        <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px;">All partners must hold current RLNZ certification and agree to our Partner Terms before application.</p>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+          <a href="/partner-terms" 
+             target="_blank" 
+             style="background: rgba(255,255,255,0.2); color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+            Review Partner Terms
+          </a>
+        </div>
+      </div>
+
+      <div class="application-form-content">
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
+            <input type="checkbox" id="rlnzCertified" style="transform: scale(1.3);" required>
+            <span>I hold a current RLNZ refrigerant handling license</span>
+          </label>
+        </div>
+        
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
+            <input type="checkbox" id="termsAccepted" style="transform: scale(1.3);" required>
+            <span>I have read and agree to the 
+              <a href="/partner-terms" 
+                 target="_blank" 
+                 style="color: #00b4d8; text-decoration: underline;">
+                Partner Terms and Conditions
+              </a>
+            </span>
+          </label>
+        </div>
+
+        <button id="proceedToApplication" 
+                style="background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 15px 40px; border: none; border-radius: 50px; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; width: 100%; opacity: 0.5; pointer-events: none; margin-top: 20px;"
+                disabled>
+          Proceed to Partner Application
+        </button>
+        
+        <p style="text-align: center; margin-top: 15px; color: rgba(255,255,255,0.8); font-size: 0.9em;">
+          You'll be redirected to our secure application system
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 Coolth Emergency Refrigeration. All rights reserved. | 
+    <a href="/privacy">Privacy Policy</a> | 
+    <a href="/partner-terms">Partner Terms</a></p>
+    <p style="margin-top: 10px;">Partner Enquiries: <a href="tel:0800600506">0800 600 506</a> | 
+    Apply Online: <a href="/technician-signup">www.coolth.tech/technician-signup</a></p>
+  </div>
+</footer>
+
+<script>
+// Enable proceed button only when both checkboxes are checked
+function checkRequirements() {
+  const rlnzChecked = document.getElementById('rlnzCertified').checked;
+  const termsChecked = document.getElementById('termsAccepted').checked;
+  const proceedButton = document.getElementById('proceedToApplication');
+  
+  if (rlnzChecked && termsChecked) {
+    proceedButton.disabled = false;
+    proceedButton.style.opacity = '1';
+    proceedButton.style.pointerEvents = 'auto';
+  } else {
+    proceedButton.disabled = true;
+    proceedButton.style.opacity = '0.5';
+    proceedButton.style.pointerEvents = 'none';
+  }
+}
+
+document.getElementById('rlnzCertified').addEventListener('change', checkRequirements);
+document.getElementById('termsAccepted').addEventListener('change', checkRequirements);
+
+document.getElementById('proceedToApplication').addEventListener('click', function() {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'partner_application_redirect', {
+      'event_category': 'Partner',
+      'event_label': 'Redirect to Application Form'
+    });
+  }
+  
+  // Redirect to the application form
+  window.location.href = '/technician-signup';
+});
+
+// Track scroll engagement
+let scrollTracked = false;
+window.addEventListener('scroll', function() {
+  if (!scrollTracked && window.scrollY > document.body.scrollHeight * 0.5) {
+    scrollTracked = true;
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'partner_page_scroll_50', {
+        'event_category': 'Engagement',
+        'event_label': 'Scrolled 50% of partner page'
+      });
+    }
+  }
+});
+
+// Smooth scrolling
+document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Emergency emphasis for high-demand services
+document.addEventListener('DOMContentLoaded', function() {
+  const emergencyCards = document.querySelectorAll('.service-card.emergency');
+  emergencyCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.05) translateY(-10px)';
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+    });
+  });
+});
+</script>
+
+</body>
+</html>
