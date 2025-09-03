@@ -1,566 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="pageTitle">Book Service - Coolth Emergency Refrigeration</title>
-  <meta name="description" id="pageDescription" content="Book your emergency refrigeration service with Coolth. Professional service across New Zealand." />
-  <meta name="keywords" content="emergency refrigeration, fridge repair, freezer breakdown, commercial chiller, cool room repair, HVAC maintenance, refrigeration technician NZ" />
-
-  <!-- Security Headers (Stripe + GA allowed) -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.redditstatic.com https://googleads.g.doubleclick.net https://js.stripe.com;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data: https:;
-    frame-src https://js.stripe.com https://hooks.stripe.com;
-    connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.redditstatic.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://prod-35.australiasoutheast.logic.azure.com https://prod-26.australiasoutheast.logic.azure.com https://api.stripe.com;">
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-COOLTH_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'AW-COOLTH_ID');
-    gtag('config', 'G-COOLTH_GA_ID');
-  </script>
-
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <style>
-    :root{
-      --brand:#00b4d8; --brand2:#0077b6; --ok:#06ffa5; --warn:#ff9500; --muted:#6c757d;
-      --chip:#0b5ed7; --chipbg:#eef7ff; --chipbd:#cfe2ff; --specialbg:#eaffea; --specialbd:#b7f5b7; --special:#1e7e34;
-      --emergency:#ff6b35; --emergency2:#f72585;
-    }
-    body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:#f5f5f5;margin:0;padding:0 0 80px 0;color:#333;text-align:center}
-    header{background:#fff;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-    .business-name{font-size:2.2em;font-weight:700;background:linear-gradient(135deg,var(--brand),var(--brand2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:.3em 0;text-shadow:2px 2px 4px rgba(0,0,0,.1)}
-    header img{max-width:250px;height:auto;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,.1)}
-    h1{font-size:1.8em;margin:.5em 0 .2em}
-    .breadcrumb{background:#e3f2fd;padding:10px 20px;margin:0;text-align:left;font-size:.9em}
-    .breadcrumb a{color:var(--brand);text-decoration:none}
-    .breadcrumb a:hover{text-decoration:underline}
-    
-    .emergency-banner{background:linear-gradient(135deg,var(--emergency),var(--emergency2));color:#fff;padding:12px;margin:0;font-weight:700;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.85}}
-
-    .booking-container{max-width:960px;margin:20px auto;background:#fff;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,.1);overflow:hidden}
-    .booking-header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:30px;text-align:center}
-    .booking-header h2{margin:0 0 10px 0;font-size:2em}
-    .booking-header p{margin:0;font-size:1.1em;opacity:.95}
-    .service-stats{background:rgba(255,255,255,.15);padding:15px;border-radius:8px;margin-top:15px;display:none}
-    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;text-align:center}
-    .stat-item{font-size:.9em}.stat-number{font-size:1.8em;font-weight:700;display:block}
-
-    .progress-bar{display:flex;justify-content:space-between;margin:20px 0;padding:0 20px}
-    .progress-step{flex:1;text-align:center;position:relative}
-    .progress-step::before{content:'';width:30px;height:30px;border-radius:50%;background:#ddd;display:block;margin:0 auto 8px}
-    .progress-step.active::before{background:var(--brand)}
-    .progress-step.completed::before{background:var(--ok)}
-    .progress-step span{font-size:.9em;color:#666}
-    .progress-step.active span{color:var(--brand);font-weight:700}
-
-    .booking-steps{padding:30px}
-    .step{display:none;text-align:left}
-    .step.active{display:block}
-    .step h3{color:var(--brand);margin-bottom:20px;font-size:1.4em}
-
-    .location-input,.details-input{width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:1.05em;margin-bottom:20px;box-sizing:border-box}
-    .location-input:focus,.details-input:focus{border-color:var(--brand);outline:none}
-    .details-input{height:120px;resize:vertical}
-
-    /* Calendar for HVAC */
-    .calendar-container{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
-    .calendar{border:2px solid #ddd;border-radius:8px;padding:15px}
-    .calendar h4{margin:0 0 15px 0;text-align:center}
-    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-    .day-header{text-align:center;font-weight:700;padding:8px 4px;font-size:.9em;color:#666}
-    .day{position:relative;text-align:center;padding:10px 4px;cursor:pointer;border-radius:6px;font-size:.95em;transition:all .2s}
-    .day:hover{background:#f0f0f0}
-    .day.disabled,.day.past{color:#ccc;cursor:not-allowed}
-    .day.selected{background:var(--brand);color:#fff}
-    .day .price-chip{position:absolute;right:2px;bottom:2px;font-size:.7em;padding:2px 6px;border-radius:12px;background:var(--chipbg);color:var(--chip);border:1px solid var(--chipbd);font-weight:600}
-    .day.special{outline:2px solid var(--ok);box-shadow:0 0 0 3px rgba(6,255,165,.15)}
-    .day.special .price-chip{background:var(--specialbg);border-color:var(--specialbd);color:var(--special)}
-    .calendar-legend{display:flex;gap:12px;align-items:center;font-size:.9em;color:#555;margin-top:8px}
-    .legend-box{display:inline-block;width:14px;height:14px;border:2px solid var(--ok);border-radius:4px}
-
-    /* Time windows for HVAC */
-    .time-windows{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:20px 0}
-    .time-window{border:2px solid #ddd;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:all .3s;background:#fff;position:relative}
-    .time-window:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,180,216,.15)}
-    .time-window.selected{background:linear-gradient(135deg,#f0fbff,#e3f5ff);border-color:var(--brand);border-width:3px}
-    .time-window.special-deal{border-color:var(--ok);background:linear-gradient(135deg,#f0fff4,#e8ffed)}
-    .time-window.special-deal:hover{border-color:var(--ok);box-shadow:0 4px 12px rgba(6,255,165,.15)}
-    .time-window.special-deal.selected{background:linear-gradient(135deg,#e8ffed,#d4f8dd);border-color:var(--ok)}
-    .time-window-title{font-size:1.2em;font-weight:700;margin-bottom:8px}
-    .time-window-range{color:var(--brand);font-size:1.05em;margin-bottom:10px;font-weight:600}
-    .time-window.special-deal .time-window-range{color:var(--ok)}
-    .time-window-description{font-size:.95em;color:#666;line-height:1.4}
-    .price-big{margin:10px 0;font-size:1.25em;font-weight:800;color:var(--brand)}
-    .time-window.special-deal .price-big{color:var(--ok)}
-    .availability-badge{display:inline-block;background:var(--ok);color:#fff;padding:4px 12px;border-radius:20px;font-size:.85em;margin-top:10px}
-    .availability-badge.limited{background:var(--warn)}
-    .special-badge{position:absolute;top:-8px;right:-8px;background:var(--ok);color:#fff;padding:4px 8px;border-radius:12px;font-size:.75em;font-weight:700;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-    .hold-timer{margin-top:8px;font-size:.85em;color:#555} .hold-timer[aria-live]{min-height:1em}
-
-    /* Urgency options */
-    .urgency-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin:20px 0}
-    .urgency-option{border:2px solid #ddd;border-radius:8px;padding:20px;cursor:pointer;text-align:center;transition:all .3s}
-    .urgency-option:hover{border-color:var(--brand)}
-    .urgency-option.selected{border-color:var(--brand);background:#f0fbff}
-    .urgency-option.emergency{border-color:var(--emergency);background:#fff5f0}
-    .urgency-title{font-weight:700;margin-bottom:8px}
-    .urgency-time{color:var(--brand);font-size:.95em;margin-bottom:8px}
-    .urgency-option.emergency .urgency-time{color:var(--emergency);font-weight:700}
-    .urgency-description{font-size:.9em;color:#666}
-
-    .spoilage-warning{background:#ffebee;border:2px solid #f44336;border-radius:12px;padding:20px;text-align:center;margin:20px 0;animation:urgencyPulse 2s infinite}
-    @keyframes urgencyPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.01)}}
-    .spoilage-warning h3{margin:0 0 10px 0;color:#d32f2f;font-size:1.4em}
-    .spoilage-warning p{color:#b71c1c;font-weight:500}
-
-    .reservation-summary{background:#e3f2fd;border-radius:8px;padding:20px;margin:20px 0}
-    .reservation-summary h4{margin:0 0 15px 0}
-    .summary-item{display:flex;justify-content:space-between;margin:8px 0;align-items:center}
-    .summary-item strong{color:var(--brand)}
-
-    .button{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-size:1.05em;text-decoration:none;display:inline-block;transition:all .2s;margin:10px 5px}
-    .button:hover{background:linear-gradient(135deg,#0090b0,#005680);transform:translateY(-1px)}
-    .button.secondary{background:var(--muted)}
-    .button.secondary:hover{background:#545b62}
-    .button:disabled{background:#ccc;cursor:not-allowed;transform:none}
-    .button.processing{background:var(--muted);position:relative}
-    .button.processing::after{content:'...';animation:dots 1.5s steps(3,end) infinite}
-    @keyframes dots{0%,20%{content:'.'}40%{content:'..'}60%,100%{content:'...'}}
-
-    .terms-section{background:#f8f9fa;border-radius:8px;padding:20px;margin:20px 0;text-align:left}
-    .terms-checkbox{display:flex;align-items:flex-start;gap:10px;margin:15px 0}
-    .terms-checkbox input{margin-top:4px;transform:scale(1.2)}
-    .terms-text{font-size:.95em;line-height:1.5}
-    .terms-text a{color:var(--brand);text-decoration:none}
-    .terms-text a:hover{text-decoration:underline}
-
-    .info-box{background:#e3f2fd;border:1px solid #90caf9;border-radius:8px;padding:15px;margin:15px 0;text-align:left}
-    .info-box h4{margin:0 0 10px 0;color:#0077b6}
-    .info-box ul{margin:0;padding-left:20px;color:#555}
-
-    .contact-info{margin:15px 0}
-    .contact-info label{display:block;margin-bottom:8px;font-weight:700}
-    .contact-info input{width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:1em;margin-bottom:15px;box-sizing:border-box}
-    .contact-info input:focus{border-color:var(--brand);outline:none}
-
-    .timing-notice{background:#fff3cd;border:2px solid #ffeaa7;border-radius:12px;padding:20px;margin:20px 0;text-align:left}
-    .timing-notice h4{margin:0 0 10px 0;color:#856404;display:flex;align-items:center;gap:8px}
-    .timing-notice p{margin:8px 0;color:#856404;line-height:1.5}
-
-    @media (max-width: 768px) {
-      .booking-steps{padding:20px}
-      .urgency-options{grid-template-columns:1fr}
-      .business-name{font-size:1.8em}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .calendar-container{grid-template-columns:1fr}
-      .time-windows{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-<body>
-<div class="emergency-banner">
-  🚨 FOOD SPOILAGE EMERGENCY? • Most perishables spoil within 2-4 hours • Call 0800 600 506 NOW 🚨
-</div>
-
-<header>
-  <img id="headerImage" src="/coolth-logo.png" alt="Coolth Emergency Refrigeration"/>
-  <div class="business-name">Coolth Emergency Refrigeration</div>
-  <h1 id="headerTitle">Book Your Refrigeration Service</h1>
-  <p id="headerSubtitle" style="font-size:1.1em;color:#666;margin:10px 0;"></p>
-</header>
-
-<div class="breadcrumb">
-  <a href="/">Home</a> > <span id="breadcrumbText">Book Service</span>
-</div>
-
-<div class="booking-container">
-  <div class="booking-header">
-    <h2 id="bookingTitle">Book Your Service</h2>
-    <p id="bookingDescription">24/7 Emergency refrigeration service across New Zealand</p>
-    <div class="service-stats" id="serviceStats">
-      <div class="stats-grid" id="statsContent"></div>
-    </div>
-  </div>
-
-  <div class="progress-bar" id="progressBar">
-    <div class="progress-step active" id="step1-progress"><span id="step1Label">Details</span></div>
-    <div class="progress-step" id="step2-progress"><span id="step2Label">Urgency</span></div>
-    <div class="progress-step" id="step3-progress"><span id="step3Label">Confirm</span></div>
-  </div>
-
-  <div class="booking-steps">
-    <!-- Step 1: Service Details -->
-    <div class="step active" id="step1">
-      <h3 id="step1Title">Step 1: Service Details</h3>
-
-      <div id="spoilageWarning" class="spoilage-warning" style="display:none;"></div>
-
-      <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:20px;">
-        <h4 style="margin:0 0 15px 0;color:#333;">Your Information</h4>
-        <div class="contact-info">
-          <label for="nameInput">Full Name (required)</label>
-          <input type="text" id="nameInput" placeholder="John Smith" required/>
-          <label for="phoneInput">Phone Number (required)</label>
-          <input type="tel" id="phoneInput" placeholder="021 234 5678" required/>
-          <label for="emailInput">Email Address (required)</label>
-          <input type="email" id="emailInput" placeholder="your.email@example.com" required/>
-        </div>
-      </div>
-
-      <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:20px;">
-        <h4 style="margin:0 0 15px 0;color:#333;">Equipment Information</h4>
-        <div class="contact-info">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
-            <div>
-              <label for="makeInput">Make/Brand</label>
-              <input type="text" id="makeInput" placeholder="e.g., Fisher & Paykel"/>
-            </div>
-            <div>
-              <label for="modelInput">Model</label>
-              <input type="text" id="modelInput" placeholder="e.g., RF610ADX"/>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <label for="locationInput" style="display:block;margin-bottom:8px;font-weight:700;">Where do you need service?</label>
-      <input type="text" class="location-input" id="locationInput" placeholder="Enter your address, suburb, or region"/>
-      
-      <label for="detailsInput" style="display:block;margin-bottom:8px;margin-top:15px;font-weight:700;" id="detailsLabel">Tell us more about your situation:</label>
-      <textarea class="details-input" id="detailsInput" placeholder="Describe the issue or what you need help with..."></textarea>
-      
-      <div class="info-box" id="serviceInfoBox"></div>
-
-      <div style="text-align:center;margin:20px 0;">
-        <button class="button" id="nextButton" onclick="goToStep2()">Next: Select Urgency</button>
-      </div>
-    </div>
-
-    <!-- Step 2: Urgency Selection (or Date/Time for HVAC) -->
-    <div class="step" id="step2">
-      <h3 id="step2Title">Step 2: How urgent is your situation?</h3>
-      
-      <div class="timing-notice" id="hvacTimingNotice" style="display:none;">
-        <h4>⏰ Important Timing Information</h4>
-        <p><strong>Time windows are approximate arrival times.</strong> As a mobile service, a previous job may run long. We'll text you when your technician is on the way.</p>
-      </div>
-      
-      <!-- Standard urgency options for most services -->
-      <div class="urgency-options" id="urgencyOptions" style="display:block;"></div>
-      
-      <!-- Calendar view for HVAC maintenance -->
-      <div id="calendarSection" style="display:none;">
-        <div class="calendar-container">
-          <div class="calendar" id="currentCalendar">
-            <h4 id="currentMonth"></h4>
-            <div class="calendar-grid"></div>
-            <div class="calendar-legend"><span class="legend-box"></span> <span>Special price day</span></div>
-          </div>
-          <div class="calendar" id="nextCalendar">
-            <h4 id="nextMonth"></h4>
-            <div class="calendar-grid"></div>
-            <div class="calendar-legend"><span class="legend-box"></span> <span>Special price day</span></div>
-          </div>
-        </div>
-
-        <div id="timeWindowContainer" style="display:none;">
-          <h4 style="margin:25px 0 15px 0;">Select your preferred time window for <span id="selectedDateDisplay"></span>:</h4>
-          <div class="time-windows" id="timeWindows"></div>
-        </div>
-      </div>
-
-      <div style="margin:20px 0;">
-        <button class="button secondary" onclick="goToStep1()">Back</button>
-        <button class="button" id="confirmTimeBtn" onclick="goToStep3()" disabled>Confirm Selection</button>
-      </div>
-    </div>
-
-    <!-- Step 3: Confirmation -->
-    <div class="step" id="step3">
-      <h3>Step 3: Review and confirm</h3>
-      
-      <div class="reservation-summary">
-        <h4 id="summaryTitle">Your Service Request</h4>
-        <div class="summary-item"><span>Service:</span><strong id="summaryService"></strong></div>
-        <div class="summary-item"><span>Location:</span><strong id="summaryLocation"></strong></div>
-        <div class="summary-item"><span>Phone:</span><strong id="summaryPhone"></strong></div>
-        <div class="summary-item" id="urgencyRow"><span>Response Time:</span><strong id="summaryUrgency"></strong></div>
-        <div class="summary-item" id="dateRow" style="display:none;"><span>Date:</span><strong id="summaryDate"></strong></div>
-        <div class="summary-item" id="timeRow" style="display:none;"><span>Time Window:</span><strong id="summaryTime"></strong></div>
-        <div class="summary-item"><span>Service Fee:</span><strong id="summaryPrice"></strong></div>
-      </div>
-
-      <div class="timing-notice" style="background:#e3f2fd;border-color:#90caf9;">
-        <h4>📱 What happens next?</h4>
-        <p>1. Click "Generate Payment Link" to create your secure payment link</p>
-        <p>2. Complete payment through Stripe's secure checkout</p>
-        <p>3. Receive SMS confirmation with your booking details</p>
-        <p>4. Get a notification when your technician is on the way</p>
-      </div>
-
-      <div class="terms-section">
-        <h4>Terms and Conditions</h4>
-        <div class="terms-checkbox">
-          <input type="checkbox" id="termsAgree" onchange="toggleBookingButton()"/>
-          <div class="terms-text">
-            I agree to the <a href="https://coolth.tech/terms" target="_blank">Coolth Emergency Refrigeration Terms of Service</a> and understand that:
-            <ul style="margin:10px 0;padding-left:20px;" id="termsList"></ul>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin:20px 0;">
-        <div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap;">
-          <button class="button secondary" onclick="goToStep2()">Back to Selection</button>
-          <button class="button" id="generatePaymentBtn" onclick="generatePaymentLink()" disabled>Generate Payment Link</button>
-        </div>
-        <p style="margin:15px 0;color:#666;font-size:.9em;">Secure payment processing powered by Stripe</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 /* =========================
-   SERVICE CONFIGURATIONS
+   SERVICE CONFIG
 ========================= */
 const serviceConfigs = {
-  'home-fridge': {
-    title: 'Home Fridge & Freezer Emergency Repair',
-    subtitle: 'Don\'t let your food spoil! Emergency response available',
-    breadcrumb: 'Home Fridge/Freezer',
-    bookingTitle: 'Emergency Fridge/Freezer Repair',
-    bookingDescription: 'Save your food from spoilage • 30-60 minute response',
-    step1Title: 'Step 1: Tell us about your refrigeration emergency',
-    detailsLabel: 'Describe the problem (not cooling, making noise, leaking, etc.):',
-    detailsPlaceholder: 'e.g., Fridge not cooling, freezer defrosting, water leaking, strange noises, ice buildup, etc.',
-    useCalendar: false,
-    showSpoilageWarning: true,
-    serviceCode: 'FRIDGE',
-    basePrice: 349,
-    stats: [
-      { number: '$349', text: 'emergency' },
-      { number: '30-60', text: 'minutes' },
-      { number: '24/7', text: 'service' },
-      { number: 'All', text: 'brands' }
-    ],
-    urgencyOptions: [
-      {
-        id: 'emergency',
-        title: 'EMERGENCY - Not Cooling',
-        time: '30-60 minutes',
-        description: 'Food at risk of spoilage - Priority response',
-        price: 349,
-        isEmergency: true
-      },
-      {
-        id: 'urgent',
-        title: 'Urgent - Partial Cooling',
-        time: '2-3 hours',
-        description: 'Still cooling but not properly',
-        price: 249
-      },
-      {
-        id: 'standard',
-        title: 'Standard Service',
-        time: 'Next day',
-        description: 'Non-urgent maintenance or minor issues',
-        price: 199
-      }
-    ],
-    spoilageWarning: `
-      <h3>⚠️ FOOD SPOILAGE WARNING</h3>
-      <p>Perishables spoil within 2-4 hours without refrigeration!</p>
-      <p>Act now to save hundreds of dollars in groceries</p>
-    `,
-    infoContent: `
-      <h4>Our Emergency Service Includes:</h4>
-      <ul>
-        <li><strong>Rapid diagnosis</strong> of cooling problems</li>
-        <li><strong>Refrigerant recharge</strong> if needed</li>
-        <li><strong>Compressor & thermostat</strong> repairs</li>
-        <li><strong>Seal replacement</strong> and leak fixes</li>
-        <li><strong>24/7 emergency response</strong> available</li>
-      </ul>
-    `,
-    terms: [
-      'Emergency callout includes diagnosis and minor repairs',
-      'Parts charged separately if required',
-      'Payment due upon service completion',
-      'Priority response for food spoilage emergencies'
-    ]
-  },
-  'commercial': {
-    title: 'Commercial Chiller & Freezer Emergency',
-    subtitle: 'Protect your business stock from costly losses',
-    breadcrumb: 'Commercial Refrigeration',
-    bookingTitle: 'Commercial Refrigeration Emergency',
-    bookingDescription: 'Priority business response • Compliance maintained',
-    step1Title: 'Step 1: Describe your commercial refrigeration emergency',
-    detailsLabel: 'Equipment type and problem description:',
-    detailsPlaceholder: 'e.g., Walk-in cooler not cooling, display case temperature rising, ice cream freezer down, etc.',
-    useCalendar: false,
-    showSpoilageWarning: true,
-    serviceCode: 'COMM',
-    basePrice: 549,
-    stats: [
-      { number: '$549', text: 'commercial' },
-      { number: 'Priority', text: 'response' },
-      { number: 'MPI', text: 'compliant' },
-      { number: '24/7', text: 'service' }
-    ],
-    urgencyOptions: [
-      {
-        id: 'critical',
-        title: 'CRITICAL - Total Failure',
-        time: '30 minutes',
-        description: 'Complete cooling loss - stock at immediate risk',
-        price: 749,
-        isEmergency: true
-      },
-      {
-        id: 'emergency',
-        title: 'Emergency - Rising Temps',
-        time: '60 minutes',
-        description: 'Temperature rising - compliance at risk',
-        price: 549,
-        isEmergency: true
-      },
-      {
-        id: 'scheduled',
-        title: 'Scheduled Service',
-        time: 'Within 24 hours',
-        description: 'Non-emergency maintenance',
-        price: 449
-      }
-    ],
-    spoilageWarning: `
-      <h3>🚨 STOCK LOSS PREVENTION</h3>
-      <p>Every minute counts - thousands in stock at risk!</p>
-      <p>MPI compliance requirements: Maintain cold chain</p>
-    `,
-    infoContent: `
-      <h4>Commercial Emergency Response:</h4>
-      <ul>
-        <li><strong>Priority dispatch</strong> for businesses</li>
-        <li><strong>All commercial equipment</strong> serviced</li>
-        <li><strong>Temperature logging</strong> for compliance</li>
-        <li><strong>Temporary cooling</strong> solutions available</li>
-        <li><strong>Insurance documentation</strong> provided</li>
-      </ul>
-    `,
-    terms: [
-      'Priority commercial response guaranteed',
-      'Compliance documentation provided',
-      'Parts and refrigerant charged at commercial rates',
-      'Service contracts available for regular maintenance'
-    ]
-  },
-  'coolroom': {
-    title: 'Cool Room & Walk-In Freezer Emergency',
-    subtitle: 'Rapid response for walk-in cooling emergencies',
-    breadcrumb: 'Cool Room Emergency',
-    bookingTitle: 'Cool Room Emergency Service',
-    bookingDescription: 'Walk-in cooler/freezer rescue • Priority dispatch',
-    step1Title: 'Step 1: Describe your cool room emergency',
-    detailsLabel: 'Cool room details and problem:',
-    detailsPlaceholder: 'e.g., Size of room, current temperature, type of stock stored, when problem started',
-    useCalendar: false,
-    showSpoilageWarning: true,
-    serviceCode: 'COOL',
-    basePrice: 749,
-    stats: [
-      { number: '$749', text: 'emergency' },
-      { number: '30', text: 'min response' },
-      { number: 'Large', text: 'equipment' },
-      { number: 'Priority', text: 'dispatch' }
-    ],
-    urgencyOptions: [
-      {
-        id: 'critical',
-        title: 'CRITICAL - Complete Failure',
-        time: '30 minutes',
-        description: 'Total cooling loss - immediate response required',
-        price: 949,
-        isEmergency: true
-      },
-      {
-        id: 'emergency',
-        title: 'Emergency - Partial Cooling',
-        time: '60 minutes',
-        description: 'Temperature climbing - stock at risk',
-        price: 749,
-        isEmergency: true
-      }
-    ],
-    spoilageWarning: `
-      <h3>⚠️ COOL ROOM EMERGENCY</h3>
-      <p>Large volume stock loss imminent!</p>
-      <p>Priority response for walk-in coolers & freezers</p>
-    `,
-    infoContent: `
-      <h4>Cool Room Emergency Service:</h4>
-      <ul>
-        <li><strong>Rapid response team</strong> for cool rooms</li>
-        <li><strong>Industrial refrigeration</strong> specialists</li>
-        <li><strong>Evaporator & condensing unit</strong> repairs</li>
-        <li><strong>Emergency defrost</strong> procedures</li>
-        <li><strong>Backup cooling</strong> options available</li>
-      </ul>
-    `,
-    terms: [
-      'Emergency cool room service includes rapid diagnosis',
-      'Industrial equipment repair rates apply',
-      'Temporary cooling solutions available',
-      'Priority dispatch for food safety emergencies'
-    ]
-  },
-  'hvac-maintenance': {
-    title: 'HVAC Maintenance Service',
-    subtitle: 'Professional heat pump & AC maintenance - Fixed $450',
-    breadcrumb: 'HVAC Maintenance',
-    bookingTitle: 'HVAC Maintenance Booking',
-    bookingDescription: 'Complete heat pump & AC service • Fixed $450 + GST',
-    step1Title: 'Step 1: Tell us about your HVAC system',
-    step2Title: 'Step 2: Select your preferred date and time',
-    detailsLabel: 'System details and any specific concerns:',
-    detailsPlaceholder: 'e.g., Brand/model of heat pump, number of units, any specific issues, when last serviced',
-    useCalendar: true,
-    serviceCode: 'HVAC',
-    basePrice: 450,
-    stats: [
-      { number: '$450', text: 'fixed price' },
-      { number: 'Full', text: 'service' },
-      { number: '12-month', text: 'warranty' },
-      { number: 'All', text: 'brands' }
-    ],
-    infoContent: `
-      <h4>HVAC Maintenance Includes:</h4>
-      <ul>
-        <li><strong>Complete system check</strong> & diagnostics</li>
-        <li><strong>Deep clean</strong> indoor & outdoor units</li>
-        <li><strong>Refrigerant check</strong> & top-up if needed</li>
-        <li><strong>Filter cleaning</strong> or replacement</li>
-        <li><strong>Electrical inspection</strong> & testing</li>
-        <li><strong>12-month warranty</strong> on service</li>
-      </ul>
-      <p style="margin-top: 15px;"><strong>🏷️ FIXED PRICE: $450 + GST</strong> - No hidden fees!</p>
-    `,
-    terms: [
-      'Fixed price of $450 + GST for standard maintenance',
-      '12-month warranty on service work',
-      'Additional repairs quoted separately',
-      'Cancellations require 24 hours notice'
-    ]
-  }
+  /* ... keep your serviceConfigs exactly as you have them ... */
 };
 
 /* =========================
@@ -572,559 +15,631 @@ let selectedDate = null;
 let selectedTimeWindow = null;
 let selectedUrgency = null;
 let selectedUrgencyDetails = {};
-let guaranteedSpecials = [];
+let selectedVehicleType = 'standard';
+let vehicleTypeAddon = 0;
+
+let guaranteedSpecials = [];  // [{dateISO, price, kind}]
+const ALLOWED_PRICES = [199, 229, 249, 289, 329, 349, 389];
+const REVISIT_WINDOW_HOURS = 48;
+const REVISIT_KEY = 'eek_price_seen_v1';
 let holdInterval = null;
 
-const ALLOWED_PRICES = [450]; // Fixed HVAC price
-const REVISIT_WINDOW_HOURS = 48;
-const REVISIT_KEY = 'coolth_price_seen_v1';
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(){
   const urlParams = new URLSearchParams(window.location.search);
-  const service = urlParams.get('service') || 'home-fridge';
+  const service = urlParams.get('service') || 'inspection';
   loadServiceConfig(service);
+
+  // Live summary updates from Step 1 inputs
+  [
+    'nameInput','phoneInput','emailInput','locationInput',
+    'regoInput','yearInput','makeInput','modelInput',
+    'sellerNameInput','sellerPhoneInput','detailsInput'
+  ].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateSummary);
+    if (el && el.tagName === 'TEXTAREA') el.addEventListener('keyup', updateSummary);
+  });
 });
 
 /* =========================
    LOAD SERVICE
 ========================= */
-function loadServiceConfig(serviceType) {
-  const config = serviceConfigs[serviceType] || serviceConfigs['home-fridge'];
-  
-  document.title = `${config.title} - Coolth Emergency Refrigeration`;
-  document.getElementById('pageDescription').content = `Book ${config.title.toLowerCase()} with Coolth. ${config.bookingDescription}`;
-  
-  document.getElementById('headerImage').src = '/coolth-logo.png';
+function loadServiceConfig(serviceType){
+  const config = serviceConfigs[serviceType] || serviceConfigs['inspection'];
+  document.title = `${config.title} - Eek Mobile Mechanical`;
+  document.getElementById('pageDescription').content = `Book ${config.title.toLowerCase()} with Eek Mobile Mechanical. ${config.bookingDescription}`;
+  document.getElementById('headerImage').src = '/sweet-ride.png';
   document.getElementById('headerTitle').textContent = config.title;
   document.getElementById('headerSubtitle').textContent = config.subtitle;
   document.getElementById('breadcrumbText').textContent = config.breadcrumb;
   document.getElementById('bookingTitle').textContent = config.bookingTitle;
   document.getElementById('bookingDescription').textContent = config.bookingDescription;
-  
-  if (config.stats) {
+
+  if (config.stats){
     const statsContainer = document.getElementById('statsContent');
-    statsContainer.innerHTML = config.stats.map(stat => 
-      `<div class="stat-item"><span class="stat-number">${stat.number}</span>${stat.text}</div>`
-    ).join('');
+    statsContainer.innerHTML = config.stats.map(stat => `<div class="stat-item"><span class="stat-number">${stat.number}</span>${stat.text}</div>`).join('');
     document.getElementById('serviceStats').style.display = 'block';
+  } else {
+    document.getElementById('serviceStats').style.display = 'none';
   }
-  
-  if (config.showSpoilageWarning && config.spoilageWarning) {
-    const warningDiv = document.getElementById('spoilageWarning');
-    warningDiv.innerHTML = config.spoilageWarning;
-    warningDiv.style.display = 'block';
-  }
-  
+
   document.getElementById('step1Title').textContent = config.step1Title;
   document.getElementById('detailsLabel').textContent = config.detailsLabel;
   document.getElementById('detailsInput').placeholder = config.detailsPlaceholder;
   document.getElementById('serviceInfoBox').innerHTML = config.infoContent;
-  
-  document.getElementById('step2Label').textContent = config.useCalendar ? 'Date & Time' : 'Urgency';
-  document.getElementById('step2Title').textContent = config.step2Title || 'Step 2: How urgent is your situation?';
-  document.getElementById('nextButton').textContent = config.useCalendar ? 'Next: Select Date & Time' : 'Next: Select Urgency';
-  
+
+  // Progress labels
+  document.getElementById('step1Label').textContent = 'Details';
+  document.getElementById('step2Label').textContent = 'Scheduling';
+  document.getElementById('step3Label').textContent = config.hasVehicleTypes ? 'Vehicle' : 'Confirm';
+  document.getElementById('step4Label').textContent = 'Confirm';
+
+  // Show/hide vehicle step
+  document.getElementById('step3-progress').style.display = config.hasVehicleTypes ? 'block' : 'none';
+  document.getElementById('step4-progress').style.display = 'block';
+
+  // Seller info only for inspection
+  document.getElementById('sellerInfoSection').style.display = (serviceType === 'inspection') ? 'block' : 'none';
+  document.getElementById('step2Title').textContent = config.useCalendar ? config.step2Title : 'Step 2: When do you need service?';
+
+  // Terms
   const termsList = document.getElementById('termsList');
   termsList.innerHTML = config.terms.map(term => `<li>${term}</li>`).join('');
-  
-  // Reset state
-  selectedDate = null;
-  selectedTimeWindow = null;
-  selectedUrgency = null;
-  selectedUrgencyDetails = {};
-  
-  // Reset progress
+
+  // reset globals
+  selectedDate = null; selectedTimeWindow = null; selectedUrgency = null; selectedUrgencyDetails = {};
+  selectedVehicleType = 'standard'; vehicleTypeAddon = 0;
+
+  // Reset progress UI
   document.querySelectorAll('.progress-step').forEach(el => el.classList.remove('active','completed'));
   document.getElementById('step1-progress').classList.add('active');
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
   document.getElementById('step1').classList.add('active');
-  
+
   window.currentService = serviceType;
   window.currentConfig = config;
+
+  // Seed summary with base information
+  updateSummary();
 }
 
 /* =========================
-   NAVIGATION
+   VALIDATION + NAV
 ========================= */
-function goToStep1() {
+function goToStep1(){
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
   document.getElementById('step1').classList.add('active');
   document.querySelectorAll('.progress-step').forEach(el => el.classList.remove('active','completed'));
   document.getElementById('step1-progress').classList.add('active');
+  updateSummary();
 }
 
-function goToStep2() {
+function goToStep2(){
   // Validate
   const name = document.getElementById('nameInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
   const location = document.getElementById('locationInput').value.trim();
-  
-  if (!name) { 
-    alert('Please enter your full name'); 
-    document.getElementById('nameInput').focus(); 
-    return; 
-  }
-  if (!phone) { 
-    alert('Please enter your phone number'); 
-    document.getElementById('phoneInput').focus(); 
-    return; 
-  }
+
+  if (!name){ alert('Please enter your full name'); document.getElementById('nameInput').focus(); return; }
+  if (!phone){ alert('Please enter your phone number'); document.getElementById('phoneInput').focus(); return; }
   const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-  if (!phoneRegex.test(phone) || phone.replace(/\D/g,'').length < 9) { 
-    alert('Please enter a valid phone number'); 
-    document.getElementById('phoneInput').focus(); 
-    return; 
-  }
-  if (!email) { 
-    alert('Please enter your email address'); 
-    document.getElementById('emailInput').focus(); 
-    return; 
-  }
+  if (!phoneRegex.test(phone) || phone.replace(/\D/g,'').length < 9){ alert('Please enter a valid phone number'); document.getElementById('phoneInput').focus(); return; }
+  if (!email){ alert('Please enter your email address'); document.getElementById('emailInput').focus(); return; }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) { 
-    alert('Please enter a valid email address'); 
-    document.getElementById('emailInput').focus(); 
-    return; 
+  if (!emailRegex.test(email)){ alert('Please enter a valid email address'); document.getElementById('emailInput').focus(); return; }
+  if (!location){ alert('Please enter the service location'); document.getElementById('locationInput').focus(); return; }
+
+  if (window.currentService === 'inspection'){
+    const sellerName = document.getElementById('sellerNameInput').value.trim();
+    const sellerPhone = document.getElementById('sellerPhoneInput').value.trim();
+    if (!sellerName){ alert("Please enter the seller's name or dealership name"); document.getElementById('sellerNameInput').focus(); return; }
+    if (!sellerPhone){ alert("Please enter the seller's phone number"); document.getElementById('sellerPhoneInput').focus(); return; }
+    if (!phoneRegex.test(sellerPhone) || sellerPhone.replace(/\D/g,'').length < 9){ alert('Please enter a valid seller phone number'); document.getElementById('sellerPhoneInput').focus(); return; }
   }
-  if (!location) { 
-    alert('Please enter the service location'); 
-    document.getElementById('locationInput').focus(); 
-    return; 
-  }
-  
+
+  // Proceed
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
   document.getElementById('step2').classList.add('active');
-  document.getElementById('step1-progress').classList.add('completed').classList.remove('active');
+  document.getElementById('step1-progress').classList.add('completed');
+  document.getElementById('step1-progress').classList.remove('active');
   document.getElementById('step2-progress').classList.add('active');
-  
-  if (window.currentConfig.useCalendar) {
+
+  // Setup step 2 content
+  if (window.currentConfig.useCalendar){
     document.getElementById('urgencyOptions').style.display = 'none';
     document.getElementById('calendarSection').style.display = 'block';
-    document.getElementById('hvacTimingNotice').style.display = 'block';
     initializeCalendars();
+
+    // Make sure the Step 2 continue button goes to the right place
+    const confirmBtn = document.getElementById('confirmTimeBtn');
+    confirmBtn.onclick = goToStep3;
   } else {
     document.getElementById('urgencyOptions').style.display = 'block';
     document.getElementById('calendarSection').style.display = 'none';
-    document.getElementById('hvacTimingNotice').style.display = 'none';
-    
     const urgencyContainer = document.getElementById('urgencyOptions');
-    urgencyContainer.innerHTML = window.currentConfig.urgencyOptions.map(option => `
-      <div class="urgency-option ${option.isEmergency ? 'emergency' : ''}" 
-           onclick="selectUrgency('${option.id}','${option.title}','${option.time}',${option.price},this)">
-        <div class="urgency-title">${option.title}</div>
-        <div class="urgency-time">${option.time}</div>
-        <div class="urgency-description">${option.description}</div>
-        <div style="margin-top:8px;font-weight:bold;color:${option.isEmergency ? 'var(--emergency)' : 'var(--brand)'};">$${option.price}</div>
-      </div>
-    `).join('');
+    urgencyContainer.innerHTML = window.currentConfig.urgencyOptions.map(o => `
+      <div class="urgency-option" onclick="selectUrgency('${o.id}','${o.title}','${o.time}',${o.price},this)">
+        <div class="urgency-title">${o.title}</div>
+        <div class="urgency-time">${o.time}</div>
+        <div class="urgency-description">${o.description}</div>
+        <div style="margin-top:8px;font-weight:800;color:var(--brand);">$${o.price}</div>
+      </div>`).join('');
+
+    // Ensure Step 2 continue leads onward for non-calendar services
+    const confirmBtn = document.getElementById('confirmTimeBtn');
+    confirmBtn.onclick = goToStep3;
   }
+
+  updateSummary();
 }
 
-function selectUrgency(id, title, time, price, el) {
+function selectUrgency(id, title, time, price, el){
   document.querySelectorAll('.urgency-option.selected').forEach(x => x.classList.remove('selected'));
   el.classList.add('selected');
   selectedUrgency = id;
-  selectedUrgencyDetails = {title, time, price};
+  selectedUrgencyDetails = {title,time,price};
   document.getElementById('confirmTimeBtn').disabled = false;
+  updateSummary(); // live update total + response time
 }
 
-function goToStep3() {
-  if (holdInterval) { 
-    clearInterval(holdInterval); 
-    holdInterval = null; 
-  }
-  
-  if (window.currentConfig.useCalendar) {
-    if (!selectedDate || !selectedTimeWindow) { 
-      alert('Please select both a date and a time window'); 
-      return; 
-    }
+function goToStep3(){
+  // stop any running hold timers when leaving step 2
+  if (holdInterval) { clearInterval(holdInterval); holdInterval = null; }
+
+  if (window.currentConfig.useCalendar){
+    if (!selectedDate || !selectedTimeWindow){ alert('Please select both a date and a time window'); return; }
   } else {
-    if (!selectedUrgency) { 
-      alert('Please select an urgency level'); 
-      return; 
-    }
+    if (!selectedUrgency){ alert('Please select a service time'); return; }
   }
-  
+
+  const targetStep = window.currentConfig.hasVehicleTypes ? 'step3' : 'step4';
+  const targetProgress = window.currentConfig.hasVehicleTypes ? 'step3-progress' : 'step4-progress';
+
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-  document.getElementById('step3').classList.add('active');
-  document.getElementById('step2-progress').classList.add('completed').classList.remove('active');
-  document.getElementById('step3-progress').classList.add('active');
-  
+  document.getElementById(targetStep).classList.add('active');
+  document.getElementById('step2-progress').classList.add('completed');
+  document.getElementById('step2-progress').classList.remove('active');
+  document.getElementById(targetProgress).classList.add('active');
+
+  updateSummary();
+}
+
+function goToStep4(){
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step4').classList.add('active');
+  document.getElementById('step3-progress').classList.add('completed');
+  document.getElementById('step3-progress').classList.remove('active');
+  document.getElementById('step4-progress').classList.add('active');
   updateSummary();
 }
 
 /* =========================
-   CALENDAR (HVAC)
+   CASCADING PRICING LOGIC
 ========================= */
-function initializeCalendars() {
+function isWeekendDate(d){ const W=d.getDay(); return W===0||W===6; }
+function daysUntilFromToday(date){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return Math.floor((d - today)/(1000*60*60*24));
+}
+
+function baseCascadePrice(date){
+  const d = Math.max(0, daysUntilFromToday(date));
+  const weekend = isWeekendDate(date);
+  if (!weekend){
+    if (d <= 1) return 289;
+    if (d <= 3) return 249;
+    if (d <= 6) return 229;
+    return 199;
+  } else {
+    if (d <= 1) return 349;
+    if (d <= 3) return 329;
+    return 289;
+  }
+}
+
+/* Guaranteed specials (within 7 days from tomorrow) */
+function ensureGuaranteedSpecials(){
+  guaranteedSpecials = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const candidates = [];
+  for (let i=1;i<=7;i++){ const d=new Date(today); d.setDate(today.getDate()+i); candidates.push(d); }
+
+  const weekdays = candidates.filter(d=>!isWeekendDate(d));
+  if (weekdays.length){ const w = weekdays[0]; guaranteedSpecials.push({dateISO:isoDay(w),price:199,kind:'weekday'}); }
+
+  const weekends = candidates.filter(d=>isWeekendDate(d));
+  if (weekends.length){ const w = weekends[0]; guaranteedSpecials.push({dateISO:isoDay(w),price:289,kind:'weekend'}); }
+}
+function isoDay(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString().slice(0,10); }
+function getGuaranteedSpecialFor(date){
+  const iso = isoDay(date);
+  return guaranteedSpecials.find(s => s.dateISO===iso) || null;
+}
+
+/* Revisit logic */
+function getRevisitMap(){ try{ return JSON.parse(localStorage.getItem(REVISIT_KEY)||'{}'); }catch{ return {}; } }
+function setRevisitMap(map){ localStorage.setItem(REVISIT_KEY, JSON.stringify(map)); }
+function recordPriceView(date, slotId, price){
+  const key = `${isoDay(date)}|${slotId}`; const map = getRevisitMap();
+  map[key] = {price, ts: Date.now()}; setRevisitMap(map);
+}
+function applyRevisitDrop(date, slotId, computedPrice){
+  const key = `${isoDay(date)}|${slotId}`; const map = getRevisitMap(); const rec = map[key];
+  if (!rec) return computedPrice;
+  const hours = (Date.now() - rec.ts) / 36e5;
+  if (hours > REVISIT_WINDOW_HOURS) return computedPrice;
+
+  const idx = ALLOWED_PRICES.indexOf(computedPrice);
+  if (idx <= 0) return computedPrice;
+
+  const floor = isWeekendDate(date) ? 289 : 199;
+  const lower = ALLOWED_PRICES[idx - 1];
+  return Math.max(lower, floor);
+}
+
+function getInspectionPriceForDate(date, slotId){
+  let price = baseCascadePrice(date);
+  const special = getGuaranteedSpecialFor(date);
+  if (special) price = Math.min(price, special.price);
+
+  const dropped = applyRevisitDrop(date, slotId, price);
+
+  // Never under special
+  if (special) price = Math.max(dropped, special.price);
+  else price = dropped;
+
+  return price;
+}
+
+/* =========================
+   CALENDAR / WINDOWS
+========================= */
+function initializeCalendars(){
   ensureGuaranteedSpecials();
   const today = new Date();
   const cm = today.getMonth(), cy = today.getFullYear();
-  const nm = cm === 11 ? 0 : cm + 1;
-  const ny = cm === 11 ? cy + 1 : cy;
+  const nm = cm===11 ? 0 : cm+1, ny = cm===11 ? cy+1 : cy;
   generateCalendar(cm, cy, 'currentCalendar');
   generateCalendar(nm, ny, 'nextCalendar');
+
+  // Reset any prior selection
+  selectedDate = null;
+  selectedTimeWindow = null;
+  document.getElementById('timeWindowContainer').style.display = 'none';
+  updateSummary();
 }
 
-function ensureGuaranteedSpecials() {
-  guaranteedSpecials = [];
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  
-  // Find first available weekday and weekend within next 7 days
-  const candidates = [];
-  for (let i = 1; i <= 7; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    candidates.push(d);
-  }
-  
-  const weekdays = candidates.filter(d => !isWeekendDate(d));
-  if (weekdays.length) {
-    const w = weekdays[0];
-    guaranteedSpecials.push({
-      dateISO: isoDay(w),
-      price: 450,
-      kind: 'weekday'
-    });
-  }
-  
-  const weekends = candidates.filter(d => isWeekendDate(d));
-  if (weekends.length) {
-    const w = weekends[0];
-    guaranteedSpecials.push({
-      dateISO: isoDay(w),
-      price: 450,
-      kind: 'weekend'
-    });
-  }
-}
-
-function isWeekendDate(d) {
-  const day = d.getDay();
-  return day === 0 || day === 6;
-}
-
-function isoDay(d) {
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString().slice(0,10);
-}
-
-function getGuaranteedSpecialFor(date) {
-  const iso = isoDay(date);
-  return guaranteedSpecials.find(s => s.dateISO === iso) || null;
-}
-
-function generateCalendar(month, year, containerId) {
+function generateCalendar(month, year, containerId){
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  
+  const firstDay = new Date(year,month,1).getDay();
+  const daysInMonth = new Date(year,month+1,0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+
   const container = document.getElementById(containerId);
   const grid = container.querySelector('.calendar-grid');
   const header = container.querySelector('h4');
-  
+
   header.textContent = `${monthNames[month]} ${year}`;
   grid.innerHTML = '';
-  
-  dayNames.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'day-header';
-    el.textContent = d;
-    grid.appendChild(el);
-  });
-  
-  for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement('div');
-    empty.className = 'day disabled';
-    grid.appendChild(empty);
-  }
-  
-  for (let day = 1; day <= daysInMonth; day++) {
-    const d = new Date(year, month, day);
-    const el = document.createElement('div');
-    el.className = 'day';
-    el.textContent = day;
-    
-    if (d < today) {
-      el.classList.add('past');
-      grid.appendChild(el);
-      continue;
-    }
-    
-    const chip = document.createElement('div');
-    chip.className = 'price-chip';
-    chip.textContent = '$450';
-    el.appendChild(chip);
-    
-    if (getGuaranteedSpecialFor(d)) {
-      el.classList.add('special');
-    }
-    
-    el.onclick = () => selectDate(year, month, day, el);
+
+  dayNames.forEach(d => { const el = document.createElement('div'); el.className='day-header'; el.textContent=d; grid.appendChild(el); });
+  for (let i=0;i<firstDay;i++){ const empty=document.createElement('div'); empty.className='day disabled'; grid.appendChild(empty); }
+
+  for (let day=1; day<=daysInMonth; day++){
+    const d = new Date(year,month,day);
+    const el = document.createElement('div'); el.className='day'; el.textContent=day;
+
+    if (d < today){ el.classList.add('past'); grid.appendChild(el); continue; }
+
+    const price = getInspectionPriceForDate(d,'day');
+    const chip = document.createElement('div'); chip.className='price-chip'; chip.textContent = `$${price}`; el.appendChild(chip);
+    if (getGuaranteedSpecialFor(d)) el.classList.add('special');
+
+    el.onclick = () => selectDate(year,month,day,el);
     grid.appendChild(el);
   }
 }
 
-function selectDate(year, month, day, element) {
+function selectDate(year, month, day, element){
   document.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
   element.classList.add('selected');
-  selectedDate = new Date(year, month, day);
-  showTimeWindows();
-  
-  const opts = {weekday:'long', year:'numeric', month:'long', day:'numeric'};
+  selectedDate = new Date(year,month,day);
+
+  const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
   document.getElementById('selectedDateDisplay').textContent = selectedDate.toLocaleDateString('en-NZ', opts);
+
+  showTimeWindows();
+  updateSummary(); // reflect date immediately in summary (Step 4 shows it)
 }
 
-function showTimeWindows() {
+function showTimeWindows(){
   const container = document.getElementById('timeWindowContainer');
   const windowsDiv = document.getElementById('timeWindows');
   container.style.display = 'block';
   selectedTimeWindow = null;
   document.getElementById('confirmTimeBtn').disabled = true;
-  
+
   const today = new Date();
   const isToday = selectedDate.toDateString() === today.toDateString();
   const h = today.getHours();
   const weekend = isWeekendDate(selectedDate);
-  
+
   const windows = weekend ? [
-    {id:'morning', title:'Morning', range:'8:00 AM - 12:00 PM', available: !isToday || h < 10},
-    {id:'afternoon', title:'Afternoon', range:'12:00 PM - 5:00 PM', available: !isToday || h < 15}
+    {id:'morning', title:'Morning', range:'8:00 AM - 12:00 PM', available: !isToday || h<10},
+    {id:'afternoon', title:'Afternoon', range:'12:00 PM - 5:00 PM', available: !isToday || h<15}
   ] : [
-    {id:'morning', title:'Morning', range:'8:00 AM - 12:00 PM', available: !isToday || h < 10},
-    {id:'midday', title:'Midday', range:'11:00 AM - 2:00 PM', available: !isToday || h < 13},
-    {id:'afternoon', title:'Afternoon', range:'1:00 PM - 5:00 PM', available: !isToday || h < 16}
+    {id:'morning', title:'Morning', range:'8:00 AM - 12:00 PM', available: !isToday || h<10},
+    {id:'midday', title:'Midday', range:'11:00 AM - 2:00 PM', available: !isToday || h<13},
+    {id:'afternoon', title:'Afternoon', range:'1:00 PM - 5:00 PM', available: !isToday || h<16}
   ];
-  
+
+  // Uniform per-day price
+  const dayPrice = getInspectionPriceForDate(selectedDate,'day');
   const special = getGuaranteedSpecialFor(selectedDate);
-  
-  windows.forEach(w => {
-    const d = Math.max(0, daysUntilFromToday(selectedDate));
-    const maxSlots = d <= 1 ? 3 : d <= 3 ? 5 : 8;
-    w.slots = w.available ? Math.max(1, Math.floor(Math.random() * maxSlots) || 1) : 0;
-    w.price = 450; // Fixed HVAC price
+
+  windows.forEach(w=>{
+    const d = Math.max(0,daysUntilFromToday(selectedDate));
+    const maxSlots = d<=1 ? 3 : d<=3 ? 5 : 8;
+    w.slots = w.available ? Math.max(1, Math.floor(Math.random()*maxSlots) || 1) : 0;
+    const maybeDropped = applyRevisitDrop(selectedDate, w.id, dayPrice);
+    w.price = special ? Math.max(maybeDropped, special.price) : maybeDropped;
   });
-  
-  windowsDiv.innerHTML = windows.map(w => {
-    if (!w.available) {
+
+  windowsDiv.innerHTML = windows.map(w=>{
+    if (!w.available){
       return `<div class="time-window" style="opacity:.5;cursor:not-allowed;">
         <div class="time-window-title">${w.title}</div>
         <div class="time-window-range" style="color:#999;">Too late to book</div>
         <div class="time-window-description">Try another window</div>
       </div>`;
     }
-    
     const cls = special ? 'time-window special-deal' : 'time-window';
-    const badge = w.slots <= 5 ? 
-      `<span class="availability-badge ${w.slots <= 1 ? 'limited' : ''}">
-        ${w.slots === 1 ? 'Only 1 left' : 'Only ' + w.slots + ' left'}
-      </span>` : '';
-    
-    return `<div class="${cls}" onclick="selectTimeWindow('${w.id}','${w.title}','${w.range}',${w.price},this)">
-      ${special ? '<div class="special-badge">💰 Special booking day</div>' : ''}
+    const badge = w.slots <= 5 ? `<span class="availability-badge ${w.slots<=1?'limited':''}">
+      ${w.slots===1 ? 'Only 1 left' : 'Only ' + w.slots + ' left'}
+    </span>` : '';
+
+    const revisitApplied = (w.price < dayPrice);
+    const revisitTag = revisitApplied ? `<div class="special-badge">Returning visitor discount</div>` : '';
+
+    return `<div class="${cls}" data-slot="${w.id}"
+              onclick="selectTimeWindow('${w.id}','${w.title}','${w.range}',${w.price},this)">
+      ${special ? '<div class="special-badge">💰 Special rate</div>' : '' }
+      ${revisitTag}
       <div class="time-window-title">${w.title}</div>
       <div class="time-window-range">${w.range}</div>
       <div class="time-window-description">Flexible arrival window</div>
-      <div class="price-big">$${w.price} + GST</div>
+      <div class="price-big">$${w.price}</div>
       ${badge}
       <div class="hold-timer" aria-live="polite"></div>
     </div>`;
   }).join('');
+
+  // Make sure the Step 2 continue button goes to the right place for calendar services
+  const confirmBtn = document.getElementById('confirmTimeBtn');
+  confirmBtn.onclick = goToStep3;
 }
 
-function daysUntilFromToday(date) {
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  return Math.floor((d - today)/(1000*60*60*24));
-}
-
-function selectTimeWindow(id, title, range, price, element) {
+function selectTimeWindow(id,title,range,price,element){
   document.querySelectorAll('.time-window.selected').forEach(el => el.classList.remove('selected'));
   element.classList.add('selected');
-  selectedTimeWindow = {id, title, range, price};
+  selectedTimeWindow = {id,title,range,price};
   document.getElementById('confirmTimeBtn').disabled = false;
-  
+
+  // record view for revisit logic
+  recordPriceView(selectedDate, id, price);
+
+  // live update summary price/time immediately
+  updateSummary();
+
   // 10-minute hold countdown
   const end = Date.now() + 10*60*1000;
   const timerEl = element.querySelector('.hold-timer');
   clearInterval(holdInterval);
-  holdInterval = setInterval(() => {
+  holdInterval = setInterval(()=>{
     const left = Math.max(0, end - Date.now());
     const m = Math.floor(left/60000);
     const s = Math.floor((left%60000)/1000);
-    timerEl.textContent = left > 0 ? `Reserved for ${m}:${String(s).padStart(2,'0')}` : 'Hold expired';
-    if (left <= 0) {
+    timerEl.textContent = left>0 ? `Reserved for ${m}:${String(s).padStart(2,'0')}` : 'Hold expired';
+    if (left<=0){
       clearInterval(holdInterval);
       element.classList.remove('selected');
       selectedTimeWindow = null;
       document.getElementById('confirmTimeBtn').disabled = true;
+      updateSummary();
     }
   }, 250);
 }
 
 /* =========================
-   SUMMARY
+   VEHICLE TYPES
 ========================= */
-function updateSummary() {
-  const phone = document.getElementById('phoneInput').value;
-  const location = document.getElementById('locationInput').value;
-  
-  document.getElementById('summaryService').textContent = window.currentConfig.title;
-  document.getElementById('summaryLocation').textContent = location;
-  document.getElementById('summaryPhone').textContent = phone;
-  
-  if (window.currentConfig.useCalendar) {
-    document.getElementById('urgencyRow').style.display = 'none';
-    document.getElementById('dateRow').style.display = 'flex';
-    document.getElementById('timeRow').style.display = 'flex';
-    
-    if (selectedDate) {
-      const opts = {weekday:'long', year:'numeric', month:'long', day:'numeric'};
-      document.getElementById('summaryDate').textContent = selectedDate.toLocaleDateString('en-NZ', opts);
-    }
-    document.getElementById('summaryTime').textContent = selectedTimeWindow ? selectedTimeWindow.range : 'Not selected';
-    document.getElementById('summaryPrice').textContent = '$450 + GST';
-  } else {
-    document.getElementById('urgencyRow').style.display = 'flex';
-    document.getElementById('dateRow').style.display = 'none';
-    document.getElementById('timeRow').style.display = 'none';
-    
-    document.getElementById('summaryUrgency').textContent = `${selectedUrgencyDetails.title} (${selectedUrgencyDetails.time})`;
-    document.getElementById('summaryPrice').textContent = `$${selectedUrgencyDetails.price}`;
-  }
+function selectVehicleType(type, addon, el){
+  document.querySelectorAll('.vehicle-type.selected').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedVehicleType = type;
+  vehicleTypeAddon = addon;
+  updateSummary(); // reflect vehicle addon immediately
 }
 
 /* =========================
-   PAYMENT
+   SUMMARY
 ========================= */
-function toggleBookingButton() {
+function updateSummary(){
+  const phone = (document.getElementById('phoneInput')?.value || '').trim();
+  const location = (document.getElementById('locationInput')?.value || '').trim();
+
+  document.getElementById('summaryService').textContent = window.currentConfig?.title || '';
+  document.getElementById('summaryLocation').textContent = location || '';
+  document.getElementById('summaryPhone').textContent = phone || '';
+
+  if (!window.currentConfig) return;
+
+  if (window.currentConfig.useCalendar){
+    document.getElementById('urgencyRow').style.display='none';
+    document.getElementById('dateRow').style.display='flex';
+    document.getElementById('timeRow').style.display='flex';
+
+    if (selectedDate){
+      const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
+      document.getElementById('summaryDate').textContent = selectedDate.toLocaleDateString('en-NZ', opts);
+    } else {
+      document.getElementById('summaryDate').textContent = '';
+    }
+    document.getElementById('summaryTime').textContent = selectedTimeWindow ? selectedTimeWindow.range : '';
+
+    let total = selectedTimeWindow ? selectedTimeWindow.price : window.currentConfig.basePrice;
+    if (window.currentConfig.hasVehicleTypes){
+      total += vehicleTypeAddon;
+      document.getElementById('vehicleRow').style.display='flex';
+      const names = {
+        'standard': 'Standard Vehicle',
+        'commercial': 'Commercial Vehicle (+$39)',
+        'specialty': 'Classic/Specialty (+$129)'
+      };
+      document.getElementById('summaryVehicle').textContent = names[selectedVehicleType];
+    } else {
+      document.getElementById('vehicleRow').style.display='none';
+    }
+    document.getElementById('summaryPrice').textContent = total ? `$${total}` : '';
+  } else {
+    document.getElementById('urgencyRow').style.display='flex';
+    document.getElementById('dateRow').style.display='none';
+    document.getElementById('timeRow').style.display='none';
+    document.getElementById('vehicleRow').style.display='none';
+
+    document.getElementById('summaryUrgency').textContent = selectedUrgencyDetails.time || '';
+    const total = selectedUrgencyDetails.price || window.currentConfig.basePrice;
+    document.getElementById('summaryPrice').textContent = total ? `$${total}` : '';
+  }
+
+  // Also keep the "Your Service Request" title aligned
+  document.getElementById('summaryTitle').textContent = 'Your Service Request';
+}
+
+/* =========================
+   PAYMENT + REDIRECT
+========================= */
+function toggleBookingButton(){
   document.getElementById('generatePaymentBtn').disabled = !document.getElementById('termsAgree').checked;
 }
 
-function buildRedirectUrl() {
-  const baseUrl = 'https://www.coolth.tech/thanks';
+function buildRedirectUrl(){
+  const baseUrl = 'https://www.eek.nz/thanks';
   const params = new URLSearchParams();
-  
+
   params.append('name', document.getElementById('nameInput').value.trim());
   params.append('phone', document.getElementById('phoneInput').value.trim());
   params.append('email', document.getElementById('emailInput').value.trim());
   params.append('location', document.getElementById('locationInput').value.trim());
+  params.append('rego', (document.getElementById('regoInput').value.trim()||'').toUpperCase());
+  params.append('year', document.getElementById('yearInput').value.trim());
   params.append('make', document.getElementById('makeInput').value.trim());
   params.append('model', document.getElementById('modelInput').value.trim());
   params.append('service', window.currentService);
   params.append('serviceCode', window.currentConfig.serviceCode);
   params.append('serviceTitle', window.currentConfig.title);
-  
-  let total = window.currentConfig.useCalendar && selectedTimeWindow ? 
-    selectedTimeWindow.price : 
-    (selectedUrgencyDetails.price || window.currentConfig.basePrice);
-  
+
+  let total = window.currentConfig.useCalendar && selectedTimeWindow ? selectedTimeWindow.price : (selectedUrgencyDetails.price || window.currentConfig.basePrice);
+  if (window.currentConfig.hasVehicleTypes){ total += vehicleTypeAddon; params.append('vehicleType', selectedVehicleType); params.append('vehicleAddon', vehicleTypeAddon); }
   params.append('price', total);
   params.append('details', document.getElementById('detailsInput').value || '');
-  
-  if (window.currentConfig.useCalendar && selectedDate && selectedTimeWindow) {
+
+  if (window.currentConfig.useCalendar && selectedDate && selectedTimeWindow){
     params.append('scheduledDate', selectedDate.toISOString());
     params.append('timeWindow', selectedTimeWindow.range);
     params.append('urgencyLevel', 'Scheduled');
-  } else if (selectedUrgency) {
+  } else if (selectedUrgency){
     params.append('scheduledDate', new Date().toISOString());
     params.append('timeWindow', selectedUrgencyDetails.time);
     params.append('urgencyLevel', selectedUrgency);
   }
-  
   params.append('bookingTime', new Date().toISOString());
   return `${baseUrl}?${params.toString()}`;
 }
 
-async function generatePaymentLink() {
+async function generatePaymentLink(){
   const btn = document.getElementById('generatePaymentBtn');
-  if (!document.getElementById('termsAgree').checked) {
-    alert('Please accept the terms and conditions');
-    return;
-  }
-  
-  btn.disabled = true;
-  btn.classList.add('processing');
-  btn.textContent = 'Generating Link';
-  
+  if (!document.getElementById('termsAgree').checked){ alert('Please accept the terms and conditions'); return; }
+
+  btn.disabled = true; btn.classList.add('processing'); btn.textContent='Generating Link';
+
   const customerName = document.getElementById('nameInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
   const location = document.getElementById('locationInput').value.trim();
+  const rego = (document.getElementById('regoInput').value.trim()||'').toUpperCase();
+  const year = document.getElementById('yearInput').value.trim();
   const make = document.getElementById('makeInput').value.trim();
   const model = document.getElementById('modelInput').value.trim();
-  const equipmentDescription = [make, model].filter(Boolean).join(' ') || 'Equipment details not provided';
-  
-  let total = window.currentConfig.useCalendar && selectedTimeWindow ? 
-    selectedTimeWindow.price : 
-    (selectedUrgencyDetails.price || window.currentConfig.basePrice);
-  
+  const vehicleDescription = [rego,year,make,model].filter(Boolean).join(' ') || 'Vehicle details not provided';
+
+  let total = window.currentConfig.useCalendar && selectedTimeWindow ? selectedTimeWindow.price : (selectedUrgencyDetails.price || window.currentConfig.basePrice);
+  if (window.currentConfig.hasVehicleTypes) total += vehicleTypeAddon;
+
   const bookingData = {
+    rego: rego || 'Not provided',
     amount: total * 100,
     currency: 'NZD',
-    description: `${window.currentConfig.title} - ${equipmentDescription} - ${location}`,
+    description: `${window.currentConfig.title} - ${vehicleDescription} - ${location}`,
     redirectUrl: buildRedirectUrl(),
     customerData: {
-      name: customerName,
-      phone,
-      email,
-      location,
-      equipmentMake: make,
-      equipmentModel: model,
-      equipmentDescription,
-      service: window.currentService,
-      serviceCode: window.currentConfig.serviceCode,
-      serviceTitle: window.currentConfig.title,
+      name: customerName, phone, email, location,
+      vehicleRego: rego, vehicleYear: year, vehicleMake: make, vehicleModel: model, vehicleDescription,
+      sellerName: window.currentService==='inspection' ? (document.getElementById('sellerNameInput').value.trim()) : '',
+      sellerPhone: window.currentService==='inspection' ? (document.getElementById('sellerPhoneInput').value.trim()) : '',
+      service: window.currentService, serviceCode: window.currentConfig.serviceCode, serviceTitle: window.currentConfig.title,
       details: document.getElementById('detailsInput').value || 'No additional details provided',
       price: `${total}`,
-      bookingDateTime: new Date().toLocaleString('en-NZ', {timeZone:'Pacific/Auckland'}),
+      vehicleType: window.currentConfig.hasVehicleTypes ? selectedVehicleType : '',
+      vehicleAddon: window.currentConfig.hasVehicleTypes ? vehicleTypeAddon : 0,
+      bookingDateTime: new Date().toLocaleString('en-NZ',{timeZone:'Pacific/Auckland'}),
       scheduledDate: window.currentConfig.useCalendar && selectedDate ?
-        selectedDate.toLocaleDateString('en-NZ', {weekday:'long', year:'numeric', month:'long', day:'numeric', timeZone:'Pacific/Auckland'}) : 
-        'Today',
-      scheduledTime: window.currentConfig.useCalendar && selectedTimeWindow ? 
-        selectedTimeWindow.range : 
-        (selectedUrgencyDetails.time || 'Emergency Response'),
+        selectedDate.toLocaleDateString('en-NZ',{weekday:'long',year:'numeric',month:'long',day:'numeric',timeZone:'Pacific/Auckland'}) : 'Today',
+      scheduledTime: window.currentConfig.useCalendar && selectedTimeWindow ? selectedTimeWindow.range : (selectedUrgencyDetails.time || 'Emergency Response'),
       urgencyLevel: window.currentConfig.useCalendar ? 'Scheduled' : (selectedUrgency || 'emergency')
     }
   };
-  
-  try {
-    const response = await fetch(POWER_AUTOMATE_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(bookingData)
-    });
-    
-    if (response.ok) {
+
+  try{
+    const response = await fetch(POWER_AUTOMATE_URL,{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(bookingData) });
+    if (response.ok){
       const result = await response.json();
-      if (result.url) {
-        btn.classList.remove('processing');
-        btn.style.display = 'none';
+      if (result.url){
+        btn.classList.remove('processing'); btn.style.display='none';
         const successDiv = document.createElement('div');
-        successDiv.style.cssText = 'background:#d4edda;border:2px solid #06ffa5;padding:20px;border-radius:8px;margin-top:20px;';
+        successDiv.style.cssText='background:#d4edda;border:2px solid #28a745;padding:20px;border-radius:8px;margin-top:20px;';
         successDiv.innerHTML = `
           <h4 style="color:#155724;margin:0 0 15px 0;">✓ Payment Link Generated Successfully!</h4>
           <p style="color:#155724;margin:10px 0;">Your secure payment link is ready:</p>
-          <a href="${result.url}" class="button" style="background:linear-gradient(135deg,#06ffa5,#00c896);font-size:1.2em;padding:15px 30px;display:inline-block;margin:10px 0;">
+          <a href="${result.url}" class="button" style="background:#28a745;font-size:1.2em;padding:15px 30px;display:inline-block;margin:10px 0;">
             Complete Payment ($${total})
           </a>
-          <p style="color:#666;font-size:.9em;margin-top:15px;">
-            After payment, you'll receive an SMS confirmation to ${phone} with your booking details.
-          </p>`;
+          <p style="color:#666;font-size:.9em;margin-top:15px;">After payment, you'll receive an SMS confirmation to ${phone} with your booking details.</p>`;
         btn.parentElement.appendChild(successDiv);
-        setTimeout(() => { window.location.href = result.url; }, 3000);
-      } else {
-        throw new Error('No payment URL received');
-      }
+        setTimeout(()=>{ window.location.href = result.url; },3000);
+      } else { throw new Error('No payment URL received'); }
     } else {
-      throw new Error('Server returned ' + response.status);
+      throw new Error('Server returned '+response.status);
     }
-  } catch(err) {
+  }catch(err){
     console.error('Error generating payment link:', err);
-    btn.disabled = false;
+    btn.disabled=false; btn.classList.remove('processing'); btn.textContent='Generate Payment Link';
+    alert('Unable to generate payment link automatically.\n\nPlease try one of these options:\n1. Refresh the page and try again\n2. Call us at 0800 769 000');
+  }
+}
+
+/* =========================
+   DIRECT CONFIRM (non-inspection)
+========================= */
+function directToConfirm(){
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step4').classList.add('active');
+  document.getElementById('step2-progress').classList.add('completed');
+  document.getElementById('step2-progress').classList.remove('active');
+  document.getElementById('step3-progress').classList.add('active');
+  updateSummary();
+}
+</script>
