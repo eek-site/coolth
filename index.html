@@ -25,6 +25,17 @@
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
+  <!-- Google tag (gtag.js) for Google Ads Conversion Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17529704008"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17529704008');
+    // If you have a Google Analytics ID, uncomment the line below and add your GA ID
+    // gtag('config', 'G-YOUR_GA_ID');
+  </script>
+
   <!-- Reddit Pixel -->
   <script>
     !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}
@@ -86,16 +97,6 @@
     
     rdt('init', 'a2_coolth_pixel_id', Object.keys(initConfig).length > 0 ? initConfig : undefined);
     rdt('track', 'PageVisit');
-  </script>
-
-  <!-- Google tag (gtag.js) for Google Ads Conversion Tracking -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-COOLTH_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-COOLTH_ID');
-    gtag('config', 'G-COOLTH_GA_ID');
   </script>
 
   <script type="application/ld+json">
@@ -955,9 +956,13 @@ function trackConversion(eventAction, eventCategory) {
       'event_label': eventAction.includes('winz') ? 'WINZ Quote Click' : 'Phone Call Click',
       'value': eventValue / 100
     });
+    
+    // Track conversion for Google Ads with the actual conversion ID
     if (!eventAction.includes('winz')) {
       gtag('event', 'conversion', {
-        'send_to': 'AW-COOLTH_ID/CONVERSION_ID'
+        'send_to': 'AW-17529704008/YOUR_CONVERSION_LABEL',
+        'value': eventValue / 100,
+        'currency': 'NZD'
       });
     }
   }
