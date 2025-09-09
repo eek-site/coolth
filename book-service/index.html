@@ -45,7 +45,6 @@ connect-src 'self' https://www.google-analytics.com https://www.googletagmanager
     .breadcrumb a{color:var(--brand);text-decoration:none}
     .breadcrumb a:hover{text-decoration:underline}
 
-```
 .emergency-banner{background:linear-gradient(135deg,var(--emergency),var(--emergency2));color:#fff;padding:12px;margin:0;font-weight:700;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.85}}
 
@@ -151,8 +150,6 @@ connect-src 'self' https://www.google-analytics.com https://www.googletagmanager
   .notification{top:10px;right:10px;left:10px;max-width:none;transform:translateY(-100px)}
   .notification.show{transform:translateY(0)}
 }
-```
-
   </style>
 </head>
 <body>
@@ -191,7 +188,6 @@ connect-src 'self' https://www.google-analytics.com https://www.googletagmanager
     <div class="step active" id="step1">
       <h3 id="step1Title">Step 1: Service Details</h3>
 
-```
   <div id="spoilageWarning" class="spoilage-warning" style="display:none;"></div>
 
   <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:20px;">
@@ -287,7 +283,6 @@ connect-src 'self' https://www.google-analytics.com https://www.googletagmanager
     <p style="margin:15px 0;color:#666;font-size:.9em;">Secure payment processing powered by Stripe</p>
   </div>
 </div>
-```
 
   </div>
 </div>
@@ -557,6 +552,12 @@ function goToStep1(){
 }
 
 function goToStep2(){
+  // Check if configuration is loaded
+  if (!window.currentConfig) {
+    showNotification('Configuration Error', 'Service configuration not loaded. Please refresh the page.', 'error');
+    return;
+  }
+
   const name = document.getElementById('nameInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
@@ -597,11 +598,24 @@ function goToStep2(){
 
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
   document.getElementById('step2').classList.add('active');
-  document.getElementById('step1-progress').classList.add('completed').classList.remove('active');
+  document.getElementById('step1-progress').classList.remove('active');
+  document.getElementById('step1-progress').classList.add('completed');
   document.getElementById('step2-progress').classList.add('active');
 
   // Setup urgency options
   const urgencyContainer = document.getElementById('urgencyOptions');
+  if (!urgencyContainer) {
+    console.error('Urgency options container not found');
+    showNotification('Page Error', 'Unable to display urgency options', 'error');
+    return;
+  }
+  
+  if (!window.currentConfig || !window.currentConfig.urgencyOptions) {
+    console.error('No urgency options available');
+    showNotification('Configuration Error', 'Service configuration not loaded properly', 'error');
+    return;
+  }
+  
   urgencyContainer.innerHTML = window.currentConfig.urgencyOptions.map(option => `
     <div class="urgency-option ${option.isEmergency ? 'emergency' : ''} ${option.isCallout ? 'callout' : ''}" 
          onclick="selectUrgency('${option.id}','${option.title}','${option.time}',${option.price},this)">
@@ -612,6 +626,9 @@ function goToStep2(){
       ${option.note ? `<div class="urgency-note">${option.note}</div>` : ''}
     </div>
   `).join('');
+  
+  console.log('Urgency options loaded:', window.currentConfig.urgencyOptions.length);
+  console.log('Container HTML:', urgencyContainer.innerHTML.substring(0, 200));
 }
 
 function selectUrgency(id, title, time, price, el){
@@ -630,7 +647,8 @@ function goToStep3(){
 
   document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
   document.getElementById('step3').classList.add('active');
-  document.getElementById('step2-progress').classList.add('completed').classList.remove('active');
+  document.getElementById('step2-progress').classList.remove('active');
+  document.getElementById('step2-progress').classList.add('completed');
   document.getElementById('step3-progress').classList.add('active');
   
   updateSummary();
