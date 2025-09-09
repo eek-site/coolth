@@ -476,6 +476,47 @@
     .warning-box strong {
       color: #856404;
     }
+
+    .affordable-callout {
+      background: linear-gradient(135deg, #8e44ad, #663399);
+      color: white;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(142,68,173,0.3);
+    }
+
+    .affordable-callout h3 {
+      margin: 0 0 15px 0;
+      font-size: 1.6em;
+    }
+
+    .affordable-callout p {
+      margin: 10px 0;
+      font-size: 1.1em;
+      opacity: 0.95;
+    }
+
+    .price-highlight {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .price-highlight .price {
+      font-size: 3em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .price-highlight .sub-text {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin: 5px 0 0 0;
+    }
     
     @media (max-width: 768px) {
       .contact-sections {
@@ -499,7 +540,7 @@
         margin: 0 10px;
       }
       
-      .hours-section, .keywords-highlight, .services {
+      .hours-section, .keywords-highlight, .services, .affordable-callout {
         margin: 20px 10px;
       }
     }
@@ -564,6 +605,24 @@
   <p style="font-size: 0.9em; color: #666; margin: 8px 0 0 0;">After-hours emergency callout fees apply</p>
 </div>
 
+<!-- Affordable Call-out Section -->
+<div class="affordable-callout">
+  <h3>💜 Affordable Residential Call-out Service</h3>
+  <p>Need a technician but not an emergency? Our residential call-out service is perfect for non-urgent fridge and freezer issues.</p>
+  
+  <div class="price-highlight">
+    <div class="price">$249</div>
+    <div class="sub-text">Call-out fee only • Additional charges apply for parts & labor</div>
+  </div>
+  
+  <p><strong>What's included:</strong> Professional diagnosis, minor repairs, and expert recommendations for your refrigeration issues.</p>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+    <a class="cta-button normal-hours-btn" href="tel:0800600506" onclick="trackConversion('callout_phone', 'Contact')" style="background: rgba(255,255,255,0.2); border: 2px solid white;">📞 Call 0800 600 506</a>
+    <a class="cta-button" href="https://www.coolth.tech/book-service?service=home-fridge" style="background: white; color: #8e44ad;">📅 Book Call-out Online</a>
+  </div>
+</div>
+
 <div class="warning-box">
   <strong>⚠️ URGENT: Fridge or Freezer Not Cooling?</strong>
   <p style="margin: 5px 0;">Act fast to save your food! Most perishables spoil within 2-4 hours without refrigeration. Call us immediately for rapid response.</p>
@@ -621,6 +680,11 @@
 <div class="services" id="home-fridge-freezer">
   <h2>Home Fridge & Freezer Emergency Repair</h2>
   <p>Fridge not cooling? Freezer defrosting? Our RLNZ-certified refrigeration technicians arrive fast to save your food from spoilage.</p>
+  
+  <div style="background: #f0f0ff; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #8e44ad;">
+    <p style="margin: 0; color: #333;"><strong>💡 AFFORDABLE OPTION:</strong> $249 residential call-out service now available for non-emergency repairs. Perfect for diagnostic visits and minor fixes!</p>
+  </div>
+  
   <ul>
     <li>❄️ Emergency diagnosis & repair for all brands</li>
     <li>🌡️ Temperature restoration & refrigerant recharge</li>
@@ -945,7 +1009,8 @@ function trackConversion(eventAction, eventCategory) {
     'sticky_call': 35000,
     'more_options_call': 25000,
     'winz_quote_click': 15000,
-    'winz_main_button': 20000
+    'winz_main_button': 20000,
+    'callout_phone': 24900
   };
   
   const eventValue = serviceValues[eventAction] || 35000;
@@ -994,7 +1059,8 @@ function getServiceType(eventAction) {
     'sticky_call': 'General Emergency',
     'more_options_call': 'General Inquiry',
     'winz_quote_click': 'WINZ Quote Request',
-    'winz_main_button': 'WINZ Main Quote Request'
+    'winz_main_button': 'WINZ Main Quote Request',
+    'callout_phone': 'Residential Call-out'
   };
   return serviceMap[eventAction] || 'Emergency Refrigeration';
 }
